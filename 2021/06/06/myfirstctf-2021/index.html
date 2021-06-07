@@ -1,0 +1,274 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2021 MyFirstCTF Write Up | M3t30r</title><meta name="keywords" content="MyFirstCTF,AIS3,Security,CTF"><meta name="author" content="Albert Huang"><meta name="copyright" content="Albert Huang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="這次也參加了 AIS3 的 MyFirstCTF 競賽，裡面是一些 AIS3 的題目跟額外的 baby 友善題(結果賽中都解 baby 題 QAQ)，好像蠻少人在打 MyFirstCTF 的 Write Up 的，就來整理一下吧~不過好像比較多梗題的部分(O P.S. 但是因為大部分的東西都被我刪了所以可能有點簡略敬請見諒 QAQ 這次的成績 17 名+兩題首殺~好像很普通 w  MISCCat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021 MyFirstCTF Write Up">
+<meta property="og:url" content="http://albert-notes.github.io/2021/06/06/myfirstctf-2021/index.html">
+<meta property="og:site_name" content="M3t30r">
+<meta property="og:description" content="這次也參加了 AIS3 的 MyFirstCTF 競賽，裡面是一些 AIS3 的題目跟額外的 baby 友善題(結果賽中都解 baby 題 QAQ)，好像蠻少人在打 MyFirstCTF 的 Write Up 的，就來整理一下吧~不過好像比較多梗題的部分(O P.S. 但是因為大部分的東西都被我刪了所以可能有點簡略敬請見諒 QAQ 這次的成績 17 名+兩題首殺~好像很普通 w  MISCCat">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://albert-notes.github.io/img/mfc.png">
+<meta property="article:published_time" content="2021-06-06T06:08:29.000Z">
+<meta property="article:modified_time" content="2021-06-07T07:59:26.979Z">
+<meta property="article:author" content="Albert Huang">
+<meta property="article:tag" content="MyFirstCTF">
+<meta property="article:tag" content="AIS3">
+<meta property="article:tag" content="Security">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://albert-notes.github.io/img/mfc.png"><link rel="shortcut icon" href="/img/ken.jpg"><link rel="canonical" href="http://albert-notes.github.io/2021/06/06/myfirstctf-2021/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-06-07 15:59:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/ban.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">10</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/certificates/"><i class="fa-fw fas fa-certificate"></i><span> Certificates</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/mfc.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">M3t30r</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/certificates/"><i class="fa-fw fas fa-certificate"></i><span> Certificates</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">2021 MyFirstCTF Write Up</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-06-06T06:08:29.000Z" title="Created 2021-06-06 14:08:29">2021-06-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-06-07T07:59:26.979Z" title="Updated 2021-06-07 15:59:26">2021-06-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Computer-Science/">Computer Science</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>5min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="2021 MyFirstCTF Write Up"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>這次也參加了 AIS3 的 MyFirstCTF 競賽，裡面是一些 AIS3 的題目跟額外的 baby 友善題(結果賽中都解 baby 題 QAQ)，好像蠻少人在打 MyFirstCTF 的 Write Up 的，就來整理一下吧~不過好像比較多梗題的部分(O</p>
+<p>P.S. 但是因為大部分的東西都被我刪了所以可能有點簡略敬請見諒 QAQ</p>
+<p>這次的成績 17 名+兩題首殺~好像很普通 w</p>
+<p><img src="https://i.imgur.com/NtHPsgc.png"></p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi"><a href="#Cat-Slayer-ᶠᵃᵏᵉ-Nekogoroshi" class="headerlink" title="Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi"></a>Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi</h2><p>這題跟 AIS3 Pre-exam 是一樣的題目，直接複製 XD</p>
+<p>題目給了一行 command</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TERM=xterm-256color ssh -p 5566 h173@quiz.ais3.org</span><br></pre></td></tr></table></figure>
+
+<p>把它拿到 Terminal 執行後可以發現他跳出了一個 Python 的執行畫面，用鍵盤可以輸入數字，輸入錯誤會鎖起來，因此可以用手動的輸入猜密碼，得到正確的密碼就可以解鎖 flag。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Password: 202583045529</span><br></pre></td></tr></table></figure>
+
+<p>FLAG:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AIS3&#123;H1n4m1z4w4_Sh0k0gun&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="祝賀-新垣結衣新婚快樂-發錢囉-baby"><a href="#祝賀-新垣結衣新婚快樂-發錢囉-baby" class="headerlink" title="[祝賀] 新垣結衣新婚快樂 發錢囉 [baby]"></a>[祝賀] 新垣結衣新婚快樂 發錢囉 [baby]</h2><blockquote>
+<p>Bonus : First Blood</p>
+</blockquote>
+<p>這題給了一張圖片，看起來像是 forensics，所以先用一些例如 zsteg 或 online tool 之類的工具試了一下，後來用 binwalk 試了一下發現裡面包了一個 zip 檔。</p>
+<p><img src="https://i.imgur.com/g264BDQ.jpg"></p>
+<p>P.S. 是新垣結衣欸~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ binwalk baby.png</span><br><span class="line"></span><br><span class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">0             0x0             PNG image, 1200 x 675, 8-bit&#x2F;color RGB, non-interlaced</span><br><span class="line">179           0xB3            Zlib compressed data, best compression</span><br><span class="line">1511327       0x170F9F        End of Zip archive</span><br></pre></td></tr></table></figure>
+
+<p>所以用 foremost 把裡面的東西拉出來。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ foremost baby.png -o baby</span><br><span class="line">Processing: baby.png</span><br><span class="line">|foundat&#x3D;awertyjas‮qrmnk‮.pngt�w4����?�ik�</span><br><span class="line">m��T�ԦZ&#123;�ڵ�J���F�U�k�&#x3D;�P����&amp;VlAD��z�&gt;�?��|Ϲ�x:�p?������&#125;ߏ�k�+RS0S</span><br><span class="line">*|</span><br></pre></td></tr></table></figure>
+
+<p>接下來到<code>/baby</code>可以發現一個<code>00001726.zip</code>，裡面有一張圖片，推測應該是 flag，但是 local 需要密碼解鎖，猜了幾個常用密碼跟照片名還是錯誤，所以開始找 online tool。</p>
+<p><img src="https://i.imgur.com/IJQc2PA.png"></p>
+<p>非常幸運的是我<a target="_blank" rel="noopener" href="https://www.ezyzip.com/unzip-files-online.html">第一個使用的網站</a>就讓我解開了，而且不需要密碼~</p>
+<p>P.S. 這題應該是偽加密，但是我其實到現在還是沒搞懂它的原理是什麼 XXD</p>
+<p><img src="https://i.imgur.com/fIGvBh8.png"></p>
+<p>P.S. 是星野源欸~</p>
+<p>FLAG:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AIS3&#123;看好了世界，我只示範一次如何一天搶走幾億人的老婆&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>結果新垣結衣跟星野源還是結婚了~</p>
+</blockquote>
+<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="Copy-amp-Paste-baby"><a href="#Copy-amp-Paste-baby" class="headerlink" title="Copy &amp; Paste [baby]"></a>Copy &amp; Paste [baby]</h2><p>這題給了一個奇怪的黑色網站，有一個 flag 按鈕，按下去之後會顯示個幾秒 flag 之後消失。但是，他的 flag 大到我只看到中間部分，沒辦法送啊?</p>
+<p>按了 F12 之後看一下發現他好像用算的把螢幕高度 anchor 住了，所以我的螢幕不夠長就看不到完整的 flag。那有什麼方法可以讓完整的 flag 顯示出來?</p>
+<p>後來腦洞大開把瀏覽器壓扁之後，他的 height 變小，我就可以看到完整的 flag 了!</p>
+<p>P.S. 通靈用在這裡是正確的(O</p>
+<p><img src="https://i.imgur.com/CrzUGc1.png"></p>
+<p>FLAG:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AIS3&#123;Re33Ee3E33e3eEEe3eE3El11I1l1i11y_lo0O0oo00o00oOC0OOoo00o0Oo0O0o0Ooo0Oo0oo0Oo0OOOO000OO0ng_f1aG&#125;</span><br></pre></td></tr></table></figure>
+
+<p>P.S. 所以我還是不知道怎麼複製貼上 w 而且這個 flag 我打好久 QQ<br>不過還好手打，賽後用 OCR 跑出來的是錯的啦= =</p>
+<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="Judgement-baby"><a href="#Judgement-baby" class="headerlink" title="Judgement [baby]"></a>Judgement [baby]</h2><p>這題的題目很簡潔，只有一個<code>Judgement.py</code>跟一個<code>output.txt</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">flag = <span class="string">&#x27;AIS3&#123;THIS_IS_A_FAKE_FLAG&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">cand = string.ascii_letters + string.digits + <span class="string">&#x27;_&#123;&#125;&#x27;</span></span><br><span class="line">charset = string.printable[:<span class="number">93</span>]</span><br><span class="line"></span><br><span class="line">enc = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> flag:</span><br><span class="line">	<span class="keyword">assert</span>(c <span class="keyword">in</span> cand)</span><br><span class="line">	enc  += charset[<span class="built_in">int</span>(sha256(c.encode()).hexdigest(), <span class="number">16</span>) % <span class="built_in">len</span>(charset)]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(enc)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">)g;Fk@&gt;2g;2V2J?d5G3_8V2&lt;dR2i5GZ@&lt;?2)g\j_2V&amp;?2;@[F@ek2_3&quot;&#x3D;k&amp;;2)\F2J9LL4g[W2&quot;[2&lt;)RZ23@&lt;?2elFZ?2&#x3D;@jZ23@&#x3D;F2Yi52;lL5Vj2J?2J8\e@eW23e2lF330</span><br></pre></td></tr></table></figure>
+
+<p>第一個想法是逆推，但是它裡面用了 sha256 加密後的某個位置的字元，所以也沒辦法直接逆推，只好用順向搜尋的方式解題。</p>
+<p>但因為他取 sha256 的字元，逆推後並不只一種可能性，所以我們用不同的 ascii 碼範圍搜尋可能字元後，因為題目提及 flag 符合文法與 leet 語法，再用手動來把 flag 拼出來。</p>
+<p>先把爆搜的程式寫出來。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">g=<span class="string">&quot;)g;Fk@&gt;2g;2V2J?d5G3_8V2&lt;dR2i5GZ@&lt;?2)g\j_2V&amp;?2;@[F@ek2_3\&quot;=k&amp;;2)\F2J9LL4g[W2\&quot;[2&lt;)RZ23@&lt;?2elFZ?2=@jZ23@=F2Yi52;lL5Vj2J?2J8\e@eW23e2lF330&quot;</span></span><br><span class="line">s=<span class="string">&quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\&quot;#$%&amp;&#x27;()*+,-./:;&lt;=&gt;?@[\]^_`&#123;|&#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">133</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">127</span>,<span class="number">64</span>,-<span class="number">1</span>): <span class="comment"># range(65,128), range(48,128)</span></span><br><span class="line">        <span class="keyword">if</span> s[<span class="built_in">int</span>(sha256(<span class="built_in">chr</span>(j).encode()).hexdigest(),<span class="number">16</span>)%<span class="number">93</span>]==g[i]:</span><br><span class="line">            <span class="built_in">print</span>(<span class="built_in">chr</span>(j),end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>跑出了三種結果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AISv&#123;iX_IS_M_BeautqM_day_~utside_AIr|q_MRe_SiNvin&#123;_qow&#123;RS_Arv_BlOOmIN_oN_dAys_ide_nhvse_wi|s_iwv_Y~u_ShOuM|_Be_Brnin_n_hv&#125;</span><br><span class="line">AISGEiT_IS_L_BeaZtFUL_Kay_~ZtsiKe_AIrDF_LRe_SiNGinE_FoQERS_ArG_BlOOmIN_oN_KAys_iKe_nhGse_QiDs_iQG_Y~Z_ShOZLD_Be_BUrnin_n_hG&#125;</span><br><span class="line">8IS39iT_IS_4_BeaZ215&#x3D;4_Kay_0Z2siKe_8IrD5_4Re_SiN3i79_51oQ9RS_8r3_BlOO@IN6_oN_K8ys_1iKe_7h3se_QiDs_1iQ3_Y0Z_ShOZ4D_Be_B&#x3D;r7i76_17_h311&#125;</span><br></pre></td></tr></table></figure>
+
+<p>剩下就是手動拼組了，不過可以確定 range(48,128)的字串長度必定為 flag 長度，因其包含了所有 flag 可能字元。</p>
+<p>FLAG:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AIS3&#123;iT_IS_4_Beaut1FUL_day_0utside_8IrD5_4Re_SiNGin9_F1owERS_Ar3_BlOOmIN6_oN_dAys_1iKe_7h3se_kiDs_1ik3_Y0u_ShOuLD_Be_BUrnin6_1n_h311&#125;</span><br></pre></td></tr></table></figure>
+
+<p>P.S.我拼了 1.5hr 錯了 10 次才對，1t’s 4 re41 h31l…</p>
+<h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><h2 id="COVID-①⑨-baby"><a href="#COVID-①⑨-baby" class="headerlink" title="ⒸⓄⓋⒾⒹ-①⑨ [baby]"></a>ⒸⓄⓋⒾⒹ-①⑨ [baby]</h2><blockquote>
+<p>Bonus : First Blood</p>
+</blockquote>
+<p>這題直接給了一個 x64 的 task.elf 檔，既然是 reverse 就直接用 IDA Pro 打開吧~</p>
+<p>Decompile 之後先看看 main，沒有找到什麼可以用的東西，function 多到暈頭轉向，看到的東西只有<code>YOU WIN!</code>…</p>
+<p><img src="https://i.imgur.com/uIRgngL.png"></p>
+<p>不過在裡面發現了一個可疑的 function<code>check_flag_is_correct(char *)</code>，進去看看 decompile 的內容。</p>
+<p><img src="https://i.imgur.com/yQDTxXZ.png"></p>
+<p>看起來是個判斷傳入字串是否符合條件的函數，點進 target 發現有一串數字。</p>
+<p><img src="https://i.imgur.com/XICIwSx.png"></p>
+<p>看來是把這些數字拿來比對運算結果，所以我們就把條件判斷爆搜字串之後就可以拿到 flag 了。</p>
+<p>寫個程式來把 flag 爆搜出來。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> p[<span class="number">32</span>]=&#123;<span class="number">65</span>,  <span class="number">72</span>,  <span class="number">81</span>,  <span class="number">48</span>, <span class="number">127</span>,  <span class="number">48</span>,  <span class="number">49</span>,  <span class="number">51</span>, <span class="number">113</span>,  <span class="number">86</span>,</span><br><span class="line">   <span class="number">98</span>,  <span class="number">59</span>,  <span class="number">97</span>,  <span class="number">62</span>, <span class="number">114</span>, <span class="number">120</span>,  <span class="number">35</span>,  <span class="number">37</span>,  <span class="number">96</span>,  <span class="number">76</span>,</span><br><span class="line">  <span class="number">121</span>,  <span class="number">33</span>,  <span class="number">35</span>, <span class="number">124</span>, <span class="number">101</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">32</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in"><span class="keyword">char</span></span>(<span class="built_in"><span class="keyword">char</span></span>(j)^i)==<span class="built_in"><span class="keyword">char</span></span>(p[i]))&#123;</span><br><span class="line">				cout&lt;&lt;<span class="built_in"><span class="keyword">char</span></span>(j);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>FLAG:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AIS3&#123;574y_h0m3|w34r_m45k&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Albert Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://albert-notes.github.io/2021/06/06/myfirstctf-2021/">http://albert-notes.github.io/2021/06/06/myfirstctf-2021/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MyFirstCTF/">MyFirstCTF</a><a class="post-meta__tags" href="/tags/AIS3/">AIS3</a><a class="post-meta__tags" href="/tags/Security/">Security</a><a class="post-meta__tags" href="/tags/CTF/">CTF</a></div><div class="post_share"><div class="social-share" data-image="/img/mfc.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2021/06/06/AIS3-2021-preexam/"><img class="prev-cover" src="/img/ais.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">2021 AIS3 Pre-exam Write Up</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/06/06/AIS3-2021-preexam/" title="2021 AIS3 Pre-exam Write Up"><img class="cover" src="/img/ais.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-06</div><div class="title">2021 AIS3 Pre-exam Write Up</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MISC"><span class="toc-number">1.</span> <span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cat-Slayer-%E1%B6%A0%E1%B5%83%E1%B5%8F%E1%B5%89-Nekogoroshi"><span class="toc-number">1.1.</span> <span class="toc-text">Cat Slayer ᶠᵃᵏᵉ | Nekogoroshi</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A5%9D%E8%B3%80-%E6%96%B0%E5%9E%A3%E7%B5%90%E8%A1%A3%E6%96%B0%E5%A9%9A%E5%BF%AB%E6%A8%82-%E7%99%BC%E9%8C%A2%E5%9B%89-baby"><span class="toc-number">1.2.</span> <span class="toc-text">[祝賀] 新垣結衣新婚快樂 發錢囉 [baby]</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web"><span class="toc-number">2.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-amp-Paste-baby"><span class="toc-number">2.1.</span> <span class="toc-text">Copy &amp; Paste [baby]</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Crypto"><span class="toc-number">3.</span> <span class="toc-text">Crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Judgement-baby"><span class="toc-number">3.1.</span> <span class="toc-text">Judgement [baby]</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reverse"><span class="toc-number">4.</span> <span class="toc-text">Reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#COVID-%E2%91%A0%E2%91%A8-baby"><span class="toc-number">4.1.</span> <span class="toc-text">ⒸⓄⓋⒾⒹ-①⑨ [baby]</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Albert Huang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', '', 'katex-wrap')
+  })
+})()</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
