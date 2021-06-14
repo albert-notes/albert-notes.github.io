@@ -1,3 +1,32 @@
+/*添加图片top*/
+var top_up = "<img id='upj' class='upj' style='max-width: 1000%; transform: translate(-70px,-70px);' src='https://cdn.jsdelivr.net/gh/lete114/CDN/Use/up.gif' title='回到顶部' >";
+
+document.getElementById("go-up").innerHTML += top_up;
+
+var mobile_sidebar_menus = document.getElementById("mobile-sidebar-menus");
+var menus_item_child = mobile_sidebar_menus.getElementsByClassName("menus_item_child");
+var menus_expand = mobile_sidebar_menus.getElementsByClassName("expand");
+for (var i = 0; i < menus_item_child.length; i++) {
+    menus_item_child[i].style.display = "none";
+    menus_expand[i].className += " closed";
+}
+
+var OriginTitle = document.title;
+var titleTime;
+document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        $('[rel="icon"]').attr('href', "/img/favicon.ico");
+        document.title = '(╥﹏╥) 不要離開我嘛...';
+        clearTimeout(titleTime);
+    } else {
+        $('[rel="icon"]').attr('href', "/img/favicon.ico");
+        document.title = '\(◦´-`◦)/♡ 耶你回來了!好開心XXD' + OriginTitle;
+        titleTime = setTimeout(function () {
+            document.title = OriginTitle;
+        }, 2000);
+    }
+});
+
 function qipao() {
     $('#page-header').circleMagic({
         radius: 10,
@@ -5,8 +34,8 @@ function qipao() {
         color: 'rgba(255,255,255,.4)',
         clearOffset: 0.99
     });
-}! function(p) {
-    p.fn.circleMagic = function(t) {
+} ! function (p) {
+    p.fn.circleMagic = function (t) {
         var o, a, n, r, e = !0,
             i = [],
             d = p.extend({ color: "rgba(255,0,0,.5)", radius: 10, density: .3, clearOffset: .2 }, t),
@@ -26,10 +55,10 @@ function qipao() {
             var t = this;
 
             function e() { t.pos.x = Math.random() * o, t.pos.y = a + 100 * Math.random(), t.alpha = .1 + Math.random() * d.clearOffset, t.scale = .1 + .3 * Math.random(), t.speed = Math.random(), "random" === d.color ? t.color = "rgba(" + Math.floor(255 * Math.random()) + ", " + Math.floor(0 * Math.random()) + ", " + Math.floor(0 * Math.random()) + ", " + Math.random().toPrecision(2) + ")" : t.color = d.color }
-            t.pos = {}, e(), this.draw = function() { t.alpha <= 0 && e(), t.pos.y -= t.speed, t.alpha -= 5e-4, r.beginPath(), r.arc(t.pos.x, t.pos.y, t.scale * d.radius, 0, 2 * Math.PI, !1), r.fillStyle = t.color, r.fill(), r.closePath() }
-        }! function() {
+            t.pos = {}, e(), this.draw = function () { t.alpha <= 0 && e(), t.pos.y -= t.speed, t.alpha -= 5e-4, r.beginPath(), r.arc(t.pos.x, t.pos.y, t.scale * d.radius, 0, 2 * Math.PI, !1), r.fillStyle = t.color, r.fill(), r.closePath() }
+        } ! function () {
             o = l.offsetWidth, a = l.offsetHeight,
-                function() {
+                function () {
                     var t = document.createElement("canvas");
                     t.id = "canvas", t.style.top = 0, t.style.zIndex = 0, t.style.position = "absolute", l.appendChild(t), t.parentElement.style.overflow = "hidden"
                 }(), (n = document.getElementById("canvas")).width = o, n.height = a, r = n.getContext("2d");
@@ -43,4 +72,4 @@ function qipao() {
 }(jQuery);
 
 // 调用气泡方法
-btf.isJqueryLoad(qipao())
+btf.isJqueryLoad(qipao)
