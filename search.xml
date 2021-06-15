@@ -33,35 +33,6 @@
     
     
     <entry>
-      <title>漫談免疫學BLOG筆記-Day II</title>
-      <link href="/2021/06/09/Immune-2/"/>
-      <url>/2021/06/09/Immune-2/</url>
-      
-        <content type="html"><![CDATA[<p>這篇接續了上篇，延續了 TNF-$\alpha$的話題，但接著把病理學帶進了文章中。一起來看看~</p><h1 id="TNF-alpha"><a href="#TNF-alpha" class="headerlink" title="TNF-$\alpha$"></a>TNF-$\alpha$</h1><p>TNF-$\alpha$是維持免疫熱度最重要的 cytokine，在正常情況下含量並不多，但細菌感染後含量會逐漸升高。教授在這裡將免疫熱度分為 5 個層次:</p><table><thead><tr><th align="center">免疫熱度</th><th align="center">症狀</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">正常情況</td></tr><tr><td align="center">2</td><td align="center">稍有微小狀況</td></tr><tr><td align="center">3</td><td align="center">人體產生不適情況</td></tr><tr><td align="center">4</td><td align="center">高燒不退</td></tr><tr><td align="center">5</td><td align="center"><strong>敗血症(septicemia)</strong></td></tr></tbody></table><h1 id="Supplement-Septicemia"><a href="#Supplement-Septicemia" class="headerlink" title="Supplement : Septicemia"></a>Supplement : Septicemia</h1><p>Septicemia 與 Sepsis 雖翻譯上都指敗血症，但事實上其中有所不同，sepsis 指嚴重化的 septicemia 與併發症。敗血症一般是由細菌感染所引起，引發人體產生嚴重的免疫反應，如細菌內外毒素、細胞激素等都可能導致相關的併發症。</p><p>根據不同的病原體，產生的敗血症可能也有所不同，包括金黃色葡萄球菌敗血症、腸道鏈球菌敗血症…等，若沒有經由妥善治療，可能會引發<strong>敗血性休克(septic shock)</strong>:</p><p>當細菌感染時，部分部位會有炎症反應，血管的通透性便會增加，此時，平常待在血管中的如白蛋白等原先維持血液中滲透壓的物質便會經由開口跑到組織當中，平時在白蛋白的幫助之下，約 90%的血漿溢出之後便會經由原處因滲透壓滲回，但在發炎反應之下，血液中的滲透壓濃度不足以讓血漿滲回，過量的血漿堆積導致局部組織水腫。</p><p><img src="https://i.imgur.com/PIUqL5b.jpg"></p><p>在此同時，血管中的血液因而減少，重要器官如大腦或腎臟等處的血壓不足，若血管收縮依然無法改善，即會產生敗血性休克。</p><h1 id="TNF-alpha-Cycle"><a href="#TNF-alpha-Cycle" class="headerlink" title="TNF-$\alpha$ Cycle"></a>TNF-$\alpha$ Cycle</h1><p>TNF-$\alpha$在沒有細菌感染的情況之下，走以下的循環路徑:<br><img src="https://i.imgur.com/mBYAeUb.jpg"></p><p>圖中 NF-kB 在 GSK3 的刺激下活化，轉錄出少量的 TNF-$\alpha$ mRNA，TNF-$\alpha$再去持續活化更多的中性球、T 細胞以及 B 細胞，此外，PKB 在上游的活化，也會抑制 GSK3 對於 NF-kB 的活化，避免產生過量的 TNF-$\alpha$。</p><p>此外，巨噬細胞(Macrophage)與嗜中性球(Neutrophil)在細菌感染時都會感應細菌細胞壁上的 LPS，引發 TNF-$\alpha$的下游反應。不同的是，中性球在吞噬細菌之後會死亡，相反的，巨噬細胞會繼續擴大免疫反應。</p><p>在 TNF-$\alpha$的刺激下，Neutrophil 的壽命會延長，超過原有的壽命約 8-12hr。在血液中被活化的中性球、T cell 與 B cell，都會進行 TNF-$\alpha$ cycle，但基於以上提到的免疫熱度概念，TNF-$\alpha$的量亦不能過多，教授表達<strong>熱度要夠但不能太熱</strong>，重點在於清除體內的病原體，但也不能因此讓人體產生無法承受的免疫反應。</p><h1 id="LPS-TLR-4-Pathway"><a href="#LPS-TLR-4-Pathway" class="headerlink" title="LPS/TLR-4 Pathway"></a>LPS/TLR-4 Pathway</h1><p>上次提及了 TNF-$\alpha$/TNFR Pathway，這次來解釋上圖右方的 LPS/TLR-4 Pathway。這兩個傳訊路徑共同刺激了下游的 TNF-$\alpha$生成。</p><p><img src="https://i.imgur.com/ywhV5j4.jpg"></p><p>看到 TRAF 應該可以聯想到上次的 TNF-$\alpha$/TNFR Pathway 裡面也有相同的複合物，事實上上次的最後一張圖便是將這兩個 Pathway 進行的一個統整。TRAF 在於兩者中都扮演重要的中間傳訊者，總括而言，有四條下游的路徑可以走:</p><p>TRAF6 下游:<br>其與 TNF-$\alpha$/TNFR Pathway 其中兩條的路徑是一樣的，分別為:</p><ul><li>MAP kinase Pathway</li><li>IKK$\beta$/IkB$\alpha$/NF-kB Pathway</li></ul><p>TRAF3 下游:<br>這是相對比較不同的路徑，如下:</p><ul><li>cIAP1/2 將 TRAF3 泛素化(ubiquitination)，直接走向降解路徑(degradeation)。</li><li>走向 IRF-3 路徑，進入核內轉錄出第一型干擾素(Type I IFNs)</li></ul><p>此外，不僅是免疫細胞，如上皮細胞等也能夠走相同路徑，但上皮細胞不轉錄 TNF-$\alpha$，走 IFN 路徑，發生抗炎反應抑制 Pro-inflammatory cytokines 的產生，在細菌感染時避免 Neutrophil 及 TNF-$\alpha$突然增多而引發敗血症。</p><h1 id="代謝性酸中毒"><a href="#代謝性酸中毒" class="headerlink" title="代謝性酸中毒"></a>代謝性酸中毒</h1><p>當免疫反應過於激烈時，人體會擴大產生 TNF-$\alpha$，開啟 Th1/Th2 immunity。但在這個同時，前面提及 TNF-$\alpha$會對上皮、肌肉、神經細胞傳遞死亡訊號，當 TNF-$\alpha$過多時，器官細胞會開始皺縮，胞質溢出導致全身器官血腫，進而缺氧。</p><p>器官便從原有的有氧呼吸切換到無氧呼吸，產生大量的乳酸根離子，最終將體液$H_2O$的$H^+$搶走以電荷中和(體內$Na^+$含量大約固定為 135-145 meq/L，不夠讓過多的乳酸進行中和)，剩餘的$OH^-$便會以陰離子$HCO_{3}^-$的形式向腎臟進行交換$Cl^-$(在高中提及腎小管交換機制):</p><p><img src="https://i.imgur.com/tfpmoaG.jpg"></p><p>如此導致高血氯的發生，並陷入氧氣更難進入的惡性循環。此外，原先的鹼性$HCO_{3}^-$被取代為中性的$Cl^-$後，體液$pH$值會持續下降，成為所謂的代謝性酸中毒。</p><p>下次來整理 TLR 的一些相關內容吧~</p><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://wleemc.pixnet.net/blog/post/118886352-%E6%BC%AB%E8%AB%87%E5%85%8D%E7%96%AB%E5%AD%B8-2">https://wleemc.pixnet.net/blog/post/118886352-%E6%BC%AB%E8%AB%87%E5%85%8D%E7%96%AB%E5%AD%B8-2</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Biology </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Biology </tag>
-            
-            <tag> Medical </tag>
-            
-            <tag> Immunity </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>2021 MyFirstCTF Write Up</title>
       <link href="/2021/06/06/myfirstctf-2021/"/>
       <url>/2021/06/06/myfirstctf-2021/</url>
@@ -143,6 +114,35 @@
             <tag> Medical </tag>
             
             <tag> YMMC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>漫談免疫學BLOG筆記-Day II</title>
+      <link href="/2021/06/03/Immune-2/"/>
+      <url>/2021/06/03/Immune-2/</url>
+      
+        <content type="html"><![CDATA[<p>這篇接續了上篇，延續了 TNF-$\alpha$的話題，但接著把病理學帶進了文章中。一起來看看~</p><h1 id="TNF-alpha"><a href="#TNF-alpha" class="headerlink" title="TNF-$\alpha$"></a>TNF-$\alpha$</h1><p>TNF-$\alpha$是維持免疫熱度最重要的 cytokine，在正常情況下含量並不多，但細菌感染後含量會逐漸升高。教授在這裡將免疫熱度分為 5 個層次:</p><table><thead><tr><th align="center">免疫熱度</th><th align="center">症狀</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">正常情況</td></tr><tr><td align="center">2</td><td align="center">稍有微小狀況</td></tr><tr><td align="center">3</td><td align="center">人體產生不適情況</td></tr><tr><td align="center">4</td><td align="center">高燒不退</td></tr><tr><td align="center">5</td><td align="center"><strong>敗血症(septicemia)</strong></td></tr></tbody></table><h1 id="Supplement-Septicemia"><a href="#Supplement-Septicemia" class="headerlink" title="Supplement : Septicemia"></a>Supplement : Septicemia</h1><p>Septicemia 與 Sepsis 雖翻譯上都指敗血症，但事實上其中有所不同，sepsis 指嚴重化的 septicemia 與併發症。敗血症一般是由細菌感染所引起，引發人體產生嚴重的免疫反應，如細菌內外毒素、細胞激素等都可能導致相關的併發症。</p><p>根據不同的病原體，產生的敗血症可能也有所不同，包括金黃色葡萄球菌敗血症、腸道鏈球菌敗血症…等，若沒有經由妥善治療，可能會引發<strong>敗血性休克(septic shock)</strong>:</p><p>當細菌感染時，部分部位會有炎症反應，血管的通透性便會增加，此時，平常待在血管中的如白蛋白等原先維持血液中滲透壓的物質便會經由開口跑到組織當中，平時在白蛋白的幫助之下，約 90%的血漿溢出之後便會經由原處因滲透壓滲回，但在發炎反應之下，血液中的滲透壓濃度不足以讓血漿滲回，過量的血漿堆積導致局部組織水腫。</p><p><img src="https://i.imgur.com/PIUqL5b.jpg"></p><p>在此同時，血管中的血液因而減少，重要器官如大腦或腎臟等處的血壓不足，若血管收縮依然無法改善，即會產生敗血性休克。</p><h1 id="TNF-alpha-Cycle"><a href="#TNF-alpha-Cycle" class="headerlink" title="TNF-$\alpha$ Cycle"></a>TNF-$\alpha$ Cycle</h1><p>TNF-$\alpha$在沒有細菌感染的情況之下，走以下的循環路徑:<br><img src="https://i.imgur.com/mBYAeUb.jpg"></p><p>圖中 NF-kB 在 GSK3 的刺激下活化，轉錄出少量的 TNF-$\alpha$ mRNA，TNF-$\alpha$再去持續活化更多的中性球、T 細胞以及 B 細胞，此外，PKB 在上游的活化，也會抑制 GSK3 對於 NF-kB 的活化，避免產生過量的 TNF-$\alpha$。</p><p>此外，巨噬細胞(Macrophage)與嗜中性球(Neutrophil)在細菌感染時都會感應細菌細胞壁上的 LPS，引發 TNF-$\alpha$的下游反應。不同的是，中性球在吞噬細菌之後會死亡，相反的，巨噬細胞會繼續擴大免疫反應。</p><p>在 TNF-$\alpha$的刺激下，Neutrophil 的壽命會延長，超過原有的壽命約 8-12hr。在血液中被活化的中性球、T cell 與 B cell，都會進行 TNF-$\alpha$ cycle，但基於以上提到的免疫熱度概念，TNF-$\alpha$的量亦不能過多，教授表達<strong>熱度要夠但不能太熱</strong>，重點在於清除體內的病原體，但也不能因此讓人體產生無法承受的免疫反應。</p><h1 id="LPS-TLR-4-Pathway"><a href="#LPS-TLR-4-Pathway" class="headerlink" title="LPS/TLR-4 Pathway"></a>LPS/TLR-4 Pathway</h1><p>上次提及了 TNF-$\alpha$/TNFR Pathway，這次來解釋上圖右方的 LPS/TLR-4 Pathway。這兩個傳訊路徑共同刺激了下游的 TNF-$\alpha$生成。</p><p><img src="https://i.imgur.com/ywhV5j4.jpg"></p><p>看到 TRAF 應該可以聯想到上次的 TNF-$\alpha$/TNFR Pathway 裡面也有相同的複合物，事實上上次的最後一張圖便是將這兩個 Pathway 進行的一個統整。TRAF 在於兩者中都扮演重要的中間傳訊者，總括而言，有四條下游的路徑可以走:</p><p>TRAF6 下游:<br>其與 TNF-$\alpha$/TNFR Pathway 其中兩條的路徑是一樣的，分別為:</p><ul><li>MAP kinase Pathway</li><li>IKK$\beta$/IkB$\alpha$/NF-kB Pathway</li></ul><p>TRAF3 下游:<br>這是相對比較不同的路徑，如下:</p><ul><li>cIAP1/2 將 TRAF3 泛素化(ubiquitination)，直接走向降解路徑(degradeation)。</li><li>走向 IRF-3 路徑，進入核內轉錄出第一型干擾素(Type I IFNs)</li></ul><p>此外，不僅是免疫細胞，如上皮細胞等也能夠走相同路徑，但上皮細胞不轉錄 TNF-$\alpha$，走 IFN 路徑，發生抗炎反應抑制 Pro-inflammatory cytokines 的產生，在細菌感染時避免 Neutrophil 及 TNF-$\alpha$突然增多而引發敗血症。</p><h1 id="代謝性酸中毒"><a href="#代謝性酸中毒" class="headerlink" title="代謝性酸中毒"></a>代謝性酸中毒</h1><p>當免疫反應過於激烈時，人體會擴大產生 TNF-$\alpha$，開啟 Th1/Th2 immunity。但在這個同時，前面提及 TNF-$\alpha$會對上皮、肌肉、神經細胞傳遞死亡訊號，當 TNF-$\alpha$過多時，器官細胞會開始皺縮，胞質溢出導致全身器官血腫，進而缺氧。</p><p>器官便從原有的有氧呼吸切換到無氧呼吸，產生大量的乳酸根離子，最終將體液$H_2O$的$H^+$搶走以電荷中和(體內$Na^+$含量大約固定為 135-145 meq/L，不夠讓過多的乳酸進行中和)，剩餘的$OH^-$便會以陰離子$HCO_{3}^-$的形式向腎臟進行交換$Cl^-$(在高中提及腎小管交換機制):</p><p><img src="https://i.imgur.com/tfpmoaG.jpg"></p><p>如此導致高血氯的發生，並陷入氧氣更難進入的惡性循環。此外，原先的鹼性$HCO_{3}^-$被取代為中性的$Cl^-$後，體液$pH$值會持續下降，成為所謂的代謝性酸中毒。</p><p>下次來整理 TLR 的一些相關內容吧~</p><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://wleemc.pixnet.net/blog/post/118886352-%E6%BC%AB%E8%AB%87%E5%85%8D%E7%96%AB%E5%AD%B8-2">https://wleemc.pixnet.net/blog/post/118886352-%E6%BC%AB%E8%AB%87%E5%85%8D%E7%96%AB%E5%AD%B8-2</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Biology </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Biology </tag>
+            
+            <tag> Medical </tag>
+            
+            <tag> Immunity </tag>
             
         </tags>
       
