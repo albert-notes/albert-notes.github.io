@@ -1,15 +1,14 @@
 var OriginTitle = document.title;
 var titleTime;
 
-btf.isJqueryLoad(function qipao() {
+function qipao() {
     $('#page-header').circleMagic({
         radius: 10,
         density: .2,
         color: 'rgba(255,255,255,.4)',
         clearOffset: 0.99
     });
-})
-btf.isJqueryLoad(! function (p) {
+} ! function (p) {
     p.fn.circleMagic = function (t) {
         var o, a, n, r, e = !0,
             i = [],
@@ -44,7 +43,7 @@ btf.isJqueryLoad(! function (p) {
             h()
         }(), window.addEventListener("scroll", c, !1), window.addEventListener("resize", s, !1)
     }
-}(jQuery),qipao());
+}(jQuery);
 
 btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
