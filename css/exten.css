@@ -1,0 +1,86 @@
+/* 鼠标图标 */
+
+body {
+  cursor: url(https://albert-notes.github.io/img/defalut.cur), auto;
+}
+
+/*a标签*/
+
+a:hover {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+/*按钮*/
+
+button:hover {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+#rightside > div > button,
+#rightside > div > a {
+  display: block;
+  margin-bottom: 2px;
+  width: 30px;
+  height: 30px;
+  color: var(--btn-color);
+  text-align: center;
+  font-size: 16px;
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+/* 打赏 */
+
+.post-reward .reward-button {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+/* 文章标签 */
+
+.layout_post .tag_share .post-meta__tags {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+/* 评论区 */
+
+.vcol * {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+.v[data-class="v"] .vicon {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+.v[data-class="v"] .vbtn {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+/* 回复 */
+
+.vat {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+/*i标签*/
+
+i:hover {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+/*up酱*/
+
+#upj:hover {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+/*页脚a标签*/
+
+#footer-wrap a:hover {
+  text-decoration: none;
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+/*分页器*/
+
+#pagination .page-number:hover {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
