@@ -43,7 +43,7 @@ function qipao() {
             h()
         }(), window.addEventListener("scroll", c, !1), window.addEventListener("resize", s, !1)
     }
-}(jQuery);
+};
 
 btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
@@ -57,6 +57,6 @@ btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
             document.title = OriginTitle;
         }, 2000);
     }
-})
-,qipao()
-);
+}));
+
+btf.isJqueryLoad(qipao());
