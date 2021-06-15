@@ -10,9 +10,17 @@ a:hover {
   cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
 }
 
+span:hover {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
 /*按钮*/
 
 button:hover {
+  cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
+}
+
+.menus_item {
   cursor: url(https://albert-notes.github.io/img/pointer.cur), auto;
 }
 
