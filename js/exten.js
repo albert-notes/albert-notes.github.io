@@ -1,6 +1,20 @@
 var OriginTitle = document.title;
 var titleTime;
 
+btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        $('[rel="icon"]').attr('href', "/img/fav.ico");
+        document.title = '(╥﹏╥) 不要離開我嘛...';
+        clearTimeout(titleTime);
+    } else {
+        $('[rel="icon"]').attr('href', "/img/fav.ico");
+        document.title = '\\(◦´-`◦)/♡ 耶你回來了!' + OriginTitle;
+        titleTime = setTimeout(function () {
+            document.title = OriginTitle;
+        }, 2000);
+    }
+}));
+
 function qipao() {
     $('#page-header').circleMagic({
         radius: 10,
@@ -44,17 +58,3 @@ function qipao() {
         }(), window.addEventListener("scroll", c, !1), window.addEventListener("resize", s, !1)
     }
 }(jQuery);
-
-btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
-    if (document.hidden) {
-        $('[rel="icon"]').attr('href', "/img/fav.ico");
-        document.title = '(╥﹏╥) 不要離開我嘛...';
-        clearTimeout(titleTime);
-    } else {
-        $('[rel="icon"]').attr('href', "/img/fav.ico");
-        document.title = '\\(◦´-`◦)/♡ 耶你回來了!' + OriginTitle;
-        titleTime = setTimeout(function () {
-            document.title = OriginTitle;
-        }, 2000);
-    }
-}));
