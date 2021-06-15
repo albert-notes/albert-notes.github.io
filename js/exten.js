@@ -1,18 +1,5 @@
 var OriginTitle = document.title;
 var titleTime;
-btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
-    if (document.hidden) {
-        $('[rel="icon"]').attr('href', "/img/fav.ico");
-        document.title = '(╥﹏╥) 不要離開我嘛...';
-        clearTimeout(titleTime);
-    } else {
-        $('[rel="icon"]').attr('href', "/img/fav.ico");
-        document.title = '\\(◦´-`◦)/♡ 耶你回來了!' + OriginTitle;
-        titleTime = setTimeout(function () {
-            document.title = OriginTitle;
-        }, 2000);
-    }
-}));
 
 function qipao() {
     $('#page-header').circleMagic({
@@ -58,5 +45,18 @@ function qipao() {
     }
 }(jQuery);
 
-// 调用气泡方法
-btf.isJqueryLoad(qipao());
+btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        $('[rel="icon"]').attr('href', "/img/fav.ico");
+        document.title = '(╥﹏╥) 不要離開我嘛...';
+        clearTimeout(titleTime);
+    } else {
+        $('[rel="icon"]').attr('href', "/img/fav.ico");
+        document.title = '\\(◦´-`◦)/♡ 耶你回來了!' + OriginTitle;
+        titleTime = setTimeout(function () {
+            document.title = OriginTitle;
+        }, 2000);
+    }
+})
+,qipao()
+);
