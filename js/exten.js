@@ -15,7 +15,7 @@ btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
     }
 }));
 
-btf.isJqueryLoad($(function() {
+btf.isJqueryLoad(function() {
 
     // 气泡
     function bubble() {
@@ -64,4 +64,4 @@ btf.isJqueryLoad($(function() {
 
     // 调用气泡方法
     bubble();
-}))
+})
