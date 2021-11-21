@@ -4,11 +4,11 @@ var titleTime;
 btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
         $('[rel="icon"]').attr('href', "/img/fav.ico");
-        document.title = '(╥﹏╥) 不要離開我嘛...';
+        document.title = 'Some secrets...? O.O';
         clearTimeout(titleTime);
     } else {
         $('[rel="icon"]').attr('href', "/img/fav.ico");
-        document.title = '\\(◦´-`◦)/♡ 耶你回來了!' + OriginTitle;
+        document.title = 'Try to find them out! o(*￣︶￣*)o' + OriginTitle;
         titleTime = setTimeout(function () {
             document.title = OriginTitle;
         }, 2000);
