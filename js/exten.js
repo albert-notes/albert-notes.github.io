@@ -4,7 +4,7 @@ var titleTime;
 btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
         $('[rel="icon"]').attr('href', "/img/fav.ico");
-        document.title = 'Some secrets...? O.O';
+        document.title = 'Some secrets...(?・・)σ';
         clearTimeout(titleTime);
     } else {
         $('[rel="icon"]').attr('href', "/img/fav.ico");
@@ -16,8 +16,6 @@ btf.isJqueryLoad(document.addEventListener('visibilitychange', function () {
 }));
 
 btf.isJqueryLoad(function() {
-
-    // 气泡
     function bubble() {
         $('#page-header').circleMagic({
             radius: 10,
@@ -61,7 +59,6 @@ btf.isJqueryLoad(function() {
             }(), window.addEventListener("scroll", c, !1), window.addEventListener("resize", s, !1)
         }
     }(jQuery);
-
-    // 调用气泡方法
+    
     bubble();
 })
