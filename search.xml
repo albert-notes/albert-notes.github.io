@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Linear Algebra I-Preface and Prior Knowledge</title>
+      <link href="/2022/01/25/linear-algebra-1/"/>
+      <url>/2022/01/25/linear-algebra-1/</url>
+      
+        <content type="html"><![CDATA[<p>這篇筆記主要整理國立嘉義高中蔡東霖老師上課時所補充的線性代數課程內容，內容會提及包括空間向量、體等重要的線性代數結構與基礎，並在部分內容中以高中課程內容作為舉例以及進行相對應的延伸。一起來看看大學等級的數學課程究竟是怎麼一回事吧~</p><div class="note success flat"><p>本篇筆記由我與國立嘉義高中數資班黃佑得共同持有!</p></div><h1 id="Introduction-Graph"><a href="#Introduction-Graph" class="headerlink" title="Introduction Graph"></a>Introduction Graph</h1><p><img src="https://i.imgur.com/QTPrVdF.png"></p><h1 id="幾何"><a href="#幾何" class="headerlink" title="幾何"></a>幾何</h1><p><img src="https://i.imgur.com/KxfbzVE.png"></p><ul><li>幾何(形) $Geometry$ $\to$ 解析幾何 $\to$ 拓樸學$(A \equiv R \not\equiv B、Q \equiv P)$、$($ 甜甜圈與咖啡杯$)$</li></ul><h1 id="代數"><a href="#代數" class="headerlink" title="代數"></a>代數</h1><p><img src="https://i.imgur.com/7xfx6Y0.png"></p><ul><li>未知數:一元$n$次方程式與$n$元一次方程式(高斯消去法 $\to$ 齊次解(向量空間)&amp;特定解 or 反矩陣</li><li>$Lie$ $Gruop$ : $E6$ ~ $E8$(宇宙理論)(大一統理論)、$F4$、$G2$</li><li>代數結構: 體$Field$、群$Group$、環$Ring$</li></ul><h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p><img src="https://i.imgur.com/1CmzY5g.png"></p><ul><li>芝諾悖論: 阿基米德與烏龜 🐢</li><li>微分方程: 與日常現象相關<ul><li>醫學系:藥量殘留劑量 💊</li><li>工程領域:電機、土木、水利、機械、化學…etc.<br>e.g. 水壩壁與雙曲線</li></ul></li><li>高等微積分: 收斂函數、發散函數、converse、connect、continuous…</li><li>複變數函數論</li><li>實變數函數論 (測度論)</li><li>統計: 大數據$Big$ $Data$、調和分析$Harmonic$ $Analysis$(電機系分析訊號)($wavelet$ $theory$)、財務數學(財務分析師-華爾街)(精算師 e.g.保險業)</li></ul><h1 id="離散數學"><a href="#離散數學" class="headerlink" title="離散數學"></a>離散數學</h1><p><img src="https://i.imgur.com/8v8K6sx.png"></p><ul><li>排列組合: 計數原理</li><li>圖論: 四色定理</li><li>集合: Category(範疇論)</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mathematics </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Mathematics </tag>
+            
+            <tag> Linear Algebra </tag>
+            
+            <tag> College </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>寫畫桃城-桃花心木的深情記憶</title>
       <link href="/2021/12/26/Momoshiro/"/>
       <url>/2021/12/26/Momoshiro/</url>
