@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Linear Algebra II-Linear Algebra</title>
+      <link href="/2022/01/31/linear-algebra-2/"/>
+      <url>/2022/01/31/linear-algebra-2/</url>
+      
+        <content type="html"><![CDATA[<p>這篇筆記會開始介紹線性代數的基本性質與定義操作，是線性代數的重要基礎，也可以推演出日後筆記的一些重要觀念，尤其是八大基本性質的部分一定要好好熟悉喔!一起來看看吧~</p><h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><p>若$V$是一個向量空間、$F \in \mathbb{R}$<br>若$x,y \in V \Longrightarrow x+y \in V$<br>若$c \in F$, $x \in V \Longrightarrow c \cdot x \in V$<br>且滿足</p><div class="note warning flat"><ol><li>$(x+y)+z=x+(y+z), \forall x,y,z \in V$</li><li>$\exists !$ $0 \in V s.t. 0+x=x,  \forall x \in V$</li><li>$\exists !$ $-x \in V s.t. x+(-x)=0, \forall x \in V$</li><li>$x+y=y+x, \forall x,y \in V$</li><li>$(ab)x=a(bx), \forall a,b \in F, x \in V$</li><li>$\exists !$ $1 \in F s.t. 1 \cdot x = x, \forall x \in V$</li><li>$(a+b)x=ax+bx,\forall a,b \in F,x \in V$</li><li>$a(x+y)=ax+by,\forall a \in F, x,y \in V$</li></ol></div><p>   等八大基本定義，則形成線性代數結構(Linear Algebra)</p><h1 id="代數結構-Linear-Algebra"><a href="#代數結構-Linear-Algebra" class="headerlink" title="代數結構(Linear Algebra)"></a>代數結構(Linear Algebra)</h1><ul><li>具有線性性質的代數結構</li></ul><h2 id="線性性質"><a href="#線性性質" class="headerlink" title="線性性質"></a>線性性質</h2><p><img src="https://i.imgur.com/Jk9wuWg.png"></p><p><strong>函數</strong> $\rightarrow$ $f(x+y)=f(x)+f(y)、f(c \cdot x)=c \cdot f(x)$</p><ul><li>$f(x)=mx ,\forall m\in \mathbb{R}$，是線性</li><li>$f(x)=x^2$，非線性</li><li>$f(x)=mx+b,\forall m,b\in \mathbb{R}$，非線性</li><li>期望值: $E(ax+by)=aE(x)+bE(y),\forall a,b\in \mathbb{R}$，是線性</li><li>標準差: $\sigma(ax+b)=|a|\sigma(x),\forall a,b\in \mathbb{R}$，非線性</li><li>$d(微分算子): f(x),g(x)$為 $x$ 的方程式 $\Rightarrow d(f+g)=d(f)+d(g)，d(cf)=c\cdot d(f),\forall c\in \mathbb{R}$，是線性</li><li>$\int(積分算子):f(x),g(x)$為 $x$ 的方程式$\Rightarrow \int(f+g)=\int (f)+\int(g),\int  (f)=c\int (f),\forall c\in \mathbb{R}$，是線性</li><li>$\sum\limits(a_k+b_k)=\sum\limits a_k + \sum\limits b_k，\sum\limits ca_k = c\sum\limits a_k$，是線性</li><li>驗證是否為線性函數: $f(x_1+x_2)=f(x_1)+f(x_2)$ 是否成立?</li></ul><p><strong>集合</strong> $\rightarrow$ $a,b \in \mathbb{S} \implies a+b \in \mathbb{S}、a \in \mathbb{S}, c \in \mathbb{F} \implies c \cdot a \in \mathbb{S}$</p><ul><li>$(\mathbb{Z},+),(\mathbb{Q},+),(\mathbb{R},+),(\mathbb{C},+)$</li><li>$P_n(\mathbb{R})={$次數小於等於 n 次的多項式$}$</li><li>$\mathbb{R}^2(平面向量)、\mathbb{R}^3(空間向量)…\mathbb{R}^n$</li><li>方陣$M_n(\mathbb{R})$、矩陣$M_{m\times n}(\mathbb{R})$</li></ul><h2 id="Algebraic-Structure"><a href="#Algebraic-Structure" class="headerlink" title="Algebraic Structure"></a>Algebraic Structure</h2><p><img src="https://i.imgur.com/RHdZHxv.png"></p><ul><li>群 1 運算(次數)</li><li>模 1.5 運算(次數)</li><li>環 2 運算(次數) $(\mathbb{Z},+,\cdot)$</li><li>向量空間 $(\mathbb{R}^2,+,\cdot)$，這裡的 $\cdot$ 是指係數積</li><li>體 $(\mathbb{Q},+,\cdot)$</li></ul><p>Definition: 令$\mathbb{S}=$ 集合，$*=$ 運算 $\implies$ 能滿足特定規則的$(\mathbb{S},*)$稱為一個代數結構<br>e.g. 群環體模 v.s. lattice(格 in 化學),maniford(流形)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mathematics </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Mathematics </tag>
+            
+            <tag> Linear Algebra </tag>
+            
+            <tag> College </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linear Algebra I-Preface and Prior Knowledge</title>
       <link href="/2022/01/25/linear-algebra-1/"/>
       <url>/2022/01/25/linear-algebra-1/</url>
