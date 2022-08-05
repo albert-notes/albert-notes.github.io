@@ -62,3 +62,10 @@ btf.isJqueryLoad(function() {
     
     bubble();
 })
+
+btf.isJqueryLoad(function () {
+    function notify(){
+        Snackbar.show({text: 'Example notification text.'});
+    }
+    notify();
+})
