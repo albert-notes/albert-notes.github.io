@@ -308,13 +308,6 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/SARS-Cov-2/</loc>
-    <lastmod>2023-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/tags/YMMC/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -357,6 +350,13 @@
   </url>
   
   <url>
+    <loc>http://albert-notes.github.io/tags/SARS-Cov-2/</loc>
+    <lastmod>2023-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://albert-notes.github.io/tags/MyFirstCTF/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -387,13 +387,6 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/categories/SARS-Cov-2/</loc>
-    <lastmod>2023-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/categories/YMMC/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -402,6 +395,13 @@
   
   <url>
     <loc>http://albert-notes.github.io/categories/Mathematics/</loc>
+    <lastmod>2023-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/categories/SARS-Cov-2/</loc>
     <lastmod>2023-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
