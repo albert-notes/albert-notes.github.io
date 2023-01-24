@@ -32,9 +32,9 @@ http://albert-notes.github.io/tags/CTF/
 http://albert-notes.github.io/tags/Biology/
 http://albert-notes.github.io/tags/Medical/
 http://albert-notes.github.io/tags/Immunity/
+http://albert-notes.github.io/tags/Literature/
 http://albert-notes.github.io/tags/Quantum-Computing/
 http://albert-notes.github.io/tags/Mathematics/
-http://albert-notes.github.io/tags/Literature/
 http://albert-notes.github.io/tags/SARS-Cov-2/
 http://albert-notes.github.io/tags/YMMC/
 http://albert-notes.github.io/tags/Education/
