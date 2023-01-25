@@ -275,7 +275,14 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Literature/</loc>
+    <loc>http://albert-notes.github.io/tags/Quantum-Computing/</loc>
+    <lastmod>2023-01-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/Mathematics/</loc>
     <lastmod>2023-01-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -303,14 +310,14 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Quantum-Computing/</loc>
+    <loc>http://albert-notes.github.io/tags/Literature/</loc>
     <lastmod>2023-01-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Mathematics/</loc>
+    <loc>http://albert-notes.github.io/tags/YMMC/</loc>
     <lastmod>2023-01-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -332,20 +339,6 @@
   
   <url>
     <loc>http://albert-notes.github.io/tags/College/</loc>
-    <lastmod>2023-01-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/Education/</loc>
-    <lastmod>2023-01-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/YMMC/</loc>
     <lastmod>2023-01-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -379,10 +372,24 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>http://albert-notes.github.io/tags/Education/</loc>
+    <lastmod>2023-01-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
     <loc>http://albert-notes.github.io/categories/Computer-Science/</loc>
+    <lastmod>2023-01-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/categories/Biology/</loc>
     <lastmod>2023-01-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -396,7 +403,7 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/categories/Biology/</loc>
+    <loc>http://albert-notes.github.io/categories/YMMC/</loc>
     <lastmod>2023-01-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -418,13 +425,6 @@
   
   <url>
     <loc>http://albert-notes.github.io/categories/CTF/</loc>
-    <lastmod>2023-01-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/categories/YMMC/</loc>
     <lastmod>2023-01-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
