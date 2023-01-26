@@ -1,0 +1,328 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CTF系列-Cryptography密碼學基礎 | M3t30r</title><meta name="keywords" content="Security,CTF,Education,Cryptography"><meta name="author" content="Albert Huang,alb105322129@gmail.com"><meta name="copyright" content="Albert Huang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="密碼學是CTF中經常出現的題型，除了經典的各種加密之外，還時常會出現出題者自定義的加密法，要求攻擊者以各種方式來進行解密，因此通常在密碼學中，數學推導與邏輯是非常被強調的一個部分，此外，如何利用程式語言寫出合適且效率好的解密方法也是不可或缺，以下我們就來介紹密碼學的各種類型與解法吧!歡迎各位來訊說明或補充筆者不足的部分喔!😄 Encode or Encrypt?一開始先來討論時常被一般大眾搞混的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF系列-Cryptography密碼學基礎">
+<meta property="og:url" content="http://albert-notes.github.io/2023/01/26/ctf-crypto-1/index.html">
+<meta property="og:site_name" content="M3t30r">
+<meta property="og:description" content="密碼學是CTF中經常出現的題型，除了經典的各種加密之外，還時常會出現出題者自定義的加密法，要求攻擊者以各種方式來進行解密，因此通常在密碼學中，數學推導與邏輯是非常被強調的一個部分，此外，如何利用程式語言寫出合適且效率好的解密方法也是不可或缺，以下我們就來介紹密碼學的各種類型與解法吧!歡迎各位來訊說明或補充筆者不足的部分喔!😄 Encode or Encrypt?一開始先來討論時常被一般大眾搞混的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://albert-notes.github.io/img/enc.jpg">
+<meta property="article:published_time" content="2023-01-26T14:58:44.000Z">
+<meta property="article:modified_time" content="2023-01-26T15:04:02.496Z">
+<meta property="article:author" content="Albert Huang">
+<meta property="article:tag" content="Security">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Education">
+<meta property="article:tag" content="Cryptography">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://albert-notes.github.io/img/enc.jpg"><link rel="shortcut icon" href="/img/fav.ico"><link rel="canonical" href="http://albert-notes.github.io/2023/01/26/ctf-crypto-1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-26 23:04:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="M3t30r" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/alb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/videos/"><i class="fa-fw fas fa-desktop"></i><span> Videos</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/certificates/"><i class="fa-fw fas fa-certificate"></i><span> Certificates</span></a></div><div class="menus_item"><a class="site-page" href="/resources/"><i class="fa-fw fas fa-lightbulb"></i><span> Resources</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-address-card"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/enc.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">M3t30r</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/videos/"><i class="fa-fw fas fa-desktop"></i><span> Videos</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/certificates/"><i class="fa-fw fas fa-certificate"></i><span> Certificates</span></a></div><div class="menus_item"><a class="site-page" href="/resources/"><i class="fa-fw fas fa-lightbulb"></i><span> Resources</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-address-card"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CTF系列-Cryptography密碼學基礎</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-01-26T14:58:44.000Z" title="Created 2023-01-26 22:58:44">2023-01-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-01-26T15:04:02.496Z" title="Updated 2023-01-26 23:04:02">2023-01-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/">CTF</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">3.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>11min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CTF系列-Cryptography密碼學基礎"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>密碼學是CTF中經常出現的題型，除了經典的各種加密之外，還時常會出現出題者自定義的加密法，要求攻擊者以各種方式來進行解密，因此通常在密碼學中，數學推導與邏輯是非常被強調的一個部分，此外，如何利用程式語言寫出合適且效率好的解密方法也是不可或缺，以下我們就來介紹密碼學的各種類型與解法吧!歡迎各位來訊說明或補充筆者不足的部分喔!😄</p>
+<h1 id="Encode-or-Encrypt"><a href="#Encode-or-Encrypt" class="headerlink" title="Encode or Encrypt?"></a>Encode or Encrypt?</h1><p>一開始先來討論時常被一般大眾搞混的兩個詞彙，Encode(編碼)與Encrypt(加密)。Encode的內容單純，甚至一般被認為無安全性，主要是以各種定義的函數來對資料進行處理，諸如Ascii、Base64、Base58、UTF-8、Big5等，以數學上的定義來說，假設$f(x)$為編碼函數，那麼利用其之反函數$f^{-1}(x)$對已編碼資料進行處理，便能回到原先的資料型態，無須多餘處理。</p>
+<p>而Encrypt的內容相對複雜一些，單純使用反函數的概念是無法將加密資料返回原先狀態的，需要經過一些額外的處理與變換，有時利用正面的方法是無法解決的，需要旁敲側擊，其中又分為古典密碼(Classical Cipher)與現代密碼(Modern Cipher)，根據不同的演算法又存在不同的處理方式，以下將逐一介紹。</p>
+<h1 id="Encode"><a href="#Encode" class="headerlink" title="Encode"></a>Encode</h1><p>Encode的方式千奇百怪，尤其是因為只要符合反函數定義者都能被廣義的稱為編碼，因此自定義的編碼也不在少數。以下會介紹幾個最為常見的編碼模式。</p>
+<h2 id="Morse-Code"><a href="#Morse-Code" class="headerlink" title="Morse Code"></a>Morse Code</h2><p>摩斯密碼，是一種時通時斷的訊號代碼，通過不同的排列順序來表達不同的英文字母、數字和標點符號。由美國發明家薩繆爾·摩斯及其助手艾爾菲德·維爾在2009年發明，也是經常在談論密碼學時提及的古典密碼經典。詳情可參見<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Morse_code">此頁面</a></p>
+<p><img src="https://i.imgur.com/gKzAwVe.png"></p>
+<p>透過以上這張對應表，能夠從文檔或音檔中獲取到對方所欲傳達的訊息。當然，現今也有發展出對應的工具來處理這方面的解碼(Decode)。</p>
+<h3 id="Decode-Tools"><a href="#Decode-Tools" class="headerlink" title="Decode Tools"></a>Decode Tools</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://gchq.github.io/CyberChef/">CyberChef</a>：幾乎可以解出所有密碼(前提為條件足夠)</li>
+<li><a target="_blank" rel="noopener" href="https://databorder.com/transfer/morse-sound-receiver/">morse-sound-receiver</a>：可處理音檔摩斯密碼</li>
+</ul>
+<h2 id="Base-X"><a href="#Base-X" class="headerlink" title="Base-X"></a>Base-X</h2><p>Base編碼基於各種不同的編碼字元數與字元，能夠產生出各種不同的加密形式。最常見的型態為Base64，它基於64個可列印字元來表示二進位資料($2^6=64$，$6$ $bit$)，一個ASCII字元為8bit，由最小公倍數得，3個文字能夠被Base64轉換成4個字元，範例如下：</p>
+<p><img src="https://i.imgur.com/RA9z1Lk.png"></p>
+<p>Base64在進行轉換時，由上面所述，資料字元數須為三的倍數，不足三位以<code>0x0</code>補足。接著根據二進位值一一取出6bit，並從64個字元中找出其對應字元，直到所有資料轉換完成。若資料位數為$3n+2,n\in N$，會在轉換資料後補上<code>==</code>；若資料位數為$3n+1,n\in N$，則會在轉換資料後補上<code>=</code>。</p>
+<div class="note success flat"><p>輕鬆一下：Base1024會是以🥳等表情符號作為編碼喔!</p>
+</div>
+
+<h3 id="Decode-Tools-1"><a href="#Decode-Tools-1" class="headerlink" title="Decode Tools"></a>Decode Tools</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://gchq.github.io/CyberChef/">CyberChef</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/cryptocoinjs/base-x">base-x</a>：能夠處理各種base為基底的加解碼(包含自訂字元)</li>
+</ul>
+<p>當然，我們也能夠透過Python來處理這方面的解碼工作，如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">raw = <span class="string">&quot;M3t30r loves cryptography.&quot;</span></span><br><span class="line">data = base64.b64encode(raw) <span class="comment"># encode</span></span><br><span class="line"><span class="keyword">assert</span> raw == base64.b64decode(data) <span class="comment"># decode</span></span><br><span class="line">chars = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span> <span class="comment"># Base64 64bit string</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="uuencode"><a href="#uuencode" class="headerlink" title="uuencode"></a>uuencode</h2><p>uuencode採用的方法基本上與Base64相同，在分為三位元的資料轉換為6bit一組時，每組的10進位資料會落於0～63之間，此時將所有資料加上32之後，剛好會落在ASCII可列印的字元範圍，以此做為資料輸出。如下例所示：</p>
+<p><img src="https://i.imgur.com/OMnmI8L.png"></p>
+<div class="note warning flat"><p>Tips：uuencode辨識方法為<strong>特殊字元</strong>非常多(因範圍為32至95，多為特殊字元)</p>
+</div>
+
+<h3 id="Decode-Tools-2"><a href="#Decode-Tools-2" class="headerlink" title="Decode Tools"></a>Decode Tools</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.dcode.fr/uu-encoding">dcode.fr</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/uu.html">uu (pip tool)</a></li>
+</ul>
+<h2 id="xxencode"><a href="#xxencode" class="headerlink" title="xxencode"></a>xxencode</h2><p>基本上與Base64相同，但使用的轉換字元串不同，它使用的是<code>+-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</code>，且資料位數不足時補的是<code>+</code>，其餘皆同。</p>
+<h3 id="Decode-Tools-3"><a href="#Decode-Tools-3" class="headerlink" title="Decode Tools"></a>Decode Tools</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/cryptocoinjs/base-x">base-x</a></li>
+</ul>
+<h2 id="URL-Encode"><a href="#URL-Encode" class="headerlink" title="URL Encode"></a>URL Encode</h2><p>通常會在瀏覽器中使用，基於一些保留字元會有相異的解讀，會先將每個字元轉換為2位16進位表示值後(以UTF-8標準)，再在前方加入<code>%</code>符號作為URL統一標準，稱為URL encode。</p>
+<h3 id="Decode-Tools-4"><a href="#Decode-Tools-4" class="headerlink" title="Decode Tools"></a>Decode Tools</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.urlencoder.org/">URL Encoder/Decoder</a></li>
+</ul>
+<h2 id="BrainFuck"><a href="#BrainFuck" class="headerlink" title="BrainFuck"></a>BrainFuck</h2><p>Brainfuck是一種極小化的程式語言，由Urban Müller在1993年創造。其目標是建立一種簡單的、可以用最小的編譯器來實現的、符合圖靈完全思想的程式語言。這個語言由八種運算子構成，它的名字也意味著想要直接讀懂它是極度困難的，即使它是一個圖靈完備的語言。八種運算子意義如下所示：</p>
+<p><img src="https://i.imgur.com/dJl7kEu.png"></p>
+<p>但在同時也有些題目會將其他語言的程式包裝成BrainFuck來讓解題者解，因此將它歸類在此處，通常只要編譯它產生輸出即可。</p>
+<h3 id="Compile-Tools"><a href="#Compile-Tools" class="headerlink" title="Compile Tools"></a>Compile Tools</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/execute_brainfk_online.php">Brainfuck Compiler</a></li>
+</ul>
+<h2 id="JSFuck"><a href="#JSFuck" class="headerlink" title="JSFuck"></a>JSFuck</h2><p>JSFuck是一種深奧的JavaScript程式設計風格，靈感來自於BrainFuck，使用六種字元完成程式。基本上不需要另外的編譯器或直譯器來執行，無論瀏覽器或JavaScript引擎中的原生JavaScript直譯器皆可直接執行。鑑於JavaScript是弱型別語言，編寫者可以用數量有限的字元重寫JavaScript中的所有功能，且可以用這種方式執行任何類型的表達式。詳見<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/JSFuck">此頁面</a></p>
+<h3 id="Compile-Tools-1"><a href="#Compile-Tools-1" class="headerlink" title="Compile Tools"></a>Compile Tools</h3><p>基本上不需要，瀏覽器的Console即可執行。</p>
+<h2 id="aaencode-jjencode"><a href="#aaencode-jjencode" class="headerlink" title="aaencode/jjencode"></a>aaencode/jjencode</h2><p>這兩種encode都是針對JavaScript的轉換方式，與JSFuck相近。aaencode會將JavaScript轉換為表情符號，而jjencode會將它轉換成類似<code>$_$</code>等風格的字串。兩者皆可轉為JavaScript，但JavaScript無法轉回。</p>
+<h3 id="Compile-Tools-2"><a href="#Compile-Tools-2" class="headerlink" title="Compile Tools"></a>Compile Tools</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://cat-in-136.github.io/2010/12/aadecode-decode-encoded-as-aaencode.html">aaencode compiler</a></li>
+<li><a target="_blank" rel="noopener" href="https://utf-8.jp/public/jjencode.html">jjencode compiler</a></li>
+</ul>
+<h2 id="統整"><a href="#統整" class="headerlink" title="統整"></a>統整</h2><p>編碼的內容其實五花八門，要完全認識世界上每一種編碼幾乎是不可能的，但比賽時只要能夠有通靈+查詢能力就不太需要擔心解不出來囉～</p>
+<h1 id="Classical-Cipher"><a href="#Classical-Cipher" class="headerlink" title="Classical Cipher"></a>Classical Cipher</h1><p>進入了古典密碼學的部分，就必須談到密碼學的兩大分類：<strong>對稱式加密</strong>(<strong>Symmetric Encryption</strong>)與<strong>非對稱式加密</strong>(<strong>Asymmetric Encryption</strong>)。對稱式加密意味著在加密與解密時所使用的密鑰(key)完全相同，無須經過任何轉換即可用以解密。</p>
+<p>而非對稱式加密則是分為公鑰(public key)與私鑰(private key)，加密者使用公鑰加密後，傳遞到另一方必須以私鑰才能解密，且有一個重要前提：<strong>私鑰可以推導出公鑰，但公鑰推導出私鑰極度困難</strong>。古典密碼的部分大多為對稱式加密，以下舉出常見的幾個密碼。</p>
+<h2 id="Caesar-Cipher"><a href="#Caesar-Cipher" class="headerlink" title="Caesar Cipher"></a>Caesar Cipher</h2><p>凱撒密碼利用了線性映射(linear transformation)的原理，是一種替換加密技術，明文中的所有字母都在字母表上向後或向前，依照一個固定數目(offset)進行偏移後被替換成密文。這個加密方法是以羅馬共和時期凱撒大帝的名字命名的，據稱當年凱撒曾用此方法與其將軍們進行聯繫。現代的ROT13也以凱撒密碼作為實作基礎。</p>
+<p>以下為凱撒密碼以數學式表示的加解密方法，$x$為資料內容，$n$為偏移量(offset)：</p>
+<p>$E_n(x)=(x+n)$ $mod$ $26$<br>$D_n(x)=(x-n)$ $mod$ $26$</p>
+<h3 id="攻擊手法"><a href="#攻擊手法" class="headerlink" title="攻擊手法"></a>攻擊手法</h3><h4 id="暴力窮舉-brute-force"><a href="#暴力窮舉-brute-force" class="headerlink" title="暴力窮舉(brute force)"></a>暴力窮舉(brute force)</h4><p>基於英文子母僅有26個字元，利用0~25間的offset必定存在正確解密結果。</p>
+<h4 id="詞頻分析-word-frequency-analysis"><a href="#詞頻分析-word-frequency-analysis" class="headerlink" title="詞頻分析(word frequency analysis)"></a>詞頻分析(word frequency analysis)</h4><p>利用對字元出現頻率的分析，找出解密最符合正常語言的文本。</p>
+<h3 id="攻擊工具"><a href="#攻擊工具" class="headerlink" title="攻擊工具"></a>攻擊工具</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.dcode.fr/caesar-cipher">dcode.fr</a>：可爆搜所有可能offset</li>
+<li><a target="_blank" rel="noopener" href="https://gchq.github.io/CyberChef/">CyberChef</a>：ROT13可作為Caesar Cipher解密工具</li>
+<li><a target="_blank" rel="noopener" href="https://quipqiup.com/">quipqiup</a>：強力詞頻分析工具</li>
+</ul>
+<p><strong>Python實作</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">enc</span>(<span class="params">raw, offset</span>): <span class="comment"># encode</span></span><br><span class="line">    data = <span class="string">&quot;&quot;</span>.join([<span class="built_in">chr</span>((<span class="built_in">ord</span>(i)-<span class="number">65</span>+offset)%<span class="number">26</span>+<span class="number">65</span>) <span class="keyword">for</span> i <span class="keyword">in</span> raw])</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dec</span>(<span class="params">raw, offset</span>): <span class="comment"># decode</span></span><br><span class="line">    data = <span class="string">&quot;&quot;</span>.join([<span class="built_in">chr</span>((<span class="built_in">ord</span>(i)-<span class="number">65</span>-offset)%<span class="number">26</span>+<span class="number">65</span>) <span class="keyword">for</span> i <span class="keyword">in</span> raw])</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line">raw = <span class="built_in">input</span>().upper() <span class="comment"># raw</span></span><br><span class="line">offset = <span class="built_in">int</span>(<span class="built_in">input</span>()) <span class="comment"># offset</span></span><br><span class="line"><span class="built_in">print</span>(enc(raw, offset))</span><br><span class="line"><span class="built_in">print</span>(dec(raw, offset))</span><br></pre></td></tr></table></figure>
+
+<h2 id="Vigenere-Cipher"><a href="#Vigenere-Cipher" class="headerlink" title="Vigenère Cipher"></a>Vigenère Cipher</h2><p>維吉尼亞密碼基本上可以視為凱撒密碼的加強版，凱撒密碼使用單獨offset對明文進行加密，而維吉尼亞用來加密的key則是一個字串，利用加上每個字的offset來對字進行加密，若是key的長度小於明文則重複使用直到加密完成，稱為金鑰流。本質上也能被視為是一種替換式密碼(Substitution Cipher)，如下表所示。</p>
+<p><img src="https://i.imgur.com/wNFQNEW.png"></p>
+<h3 id="攻擊手法-1"><a href="#攻擊手法-1" class="headerlink" title="攻擊手法"></a>攻擊手法</h3><h4 id="卡西斯基試驗-Kasiski-examination"><a href="#卡西斯基試驗-Kasiski-examination" class="headerlink" title="卡西斯基試驗(Kasiski examination)"></a>卡西斯基試驗(Kasiski examination)</h4><p>這是第一個被提出破解維吉尼亞的方法，早期的解決方案都是透過對於明文的認識、或者使用可識別的詞語作為密鑰，但卡西斯基試驗不需要任何限制。基本的概念如下：</p>
+<p>卡西斯基試驗是基於常用單詞，如the、some等，有可能被同樣的密鑰字母進行加密，而在密文中重複出現相同子字串。此時便能以重複出現長度之因數推測出密鑰可能的長度，而若有多個此類子字串，則能夠以最小公因數獲得密鑰的長度。通常文本越長的資料越容易被卡西斯基試驗攻破(越容易重複使用密鑰加密相同字串)。</p>
+<p><img src="https://i.imgur.com/Art65Ah.png"></p>
+<h4 id="弗里德曼試驗-Friedman-examination"><a href="#弗里德曼試驗-Friedman-examination" class="headerlink" title="弗里德曼試驗(Friedman examination)"></a>弗里德曼試驗(Friedman examination)</h4><p>弗里德曼試驗於1920年代發明，這項試驗使用了重合指數(index of coincidence)來描述密文字母頻率的不勻性，從而破譯密碼。</p>
+<p>$\kappa_p$指目標語言中兩個任意字母相同的概率(英文為$0.067$)，$\kappa_r$指字母表中這種情況出現的概率(英文中為$\frac{1}{26}=0.0385$)，根據弗里德曼試驗推導出的結果，密鑰長度可以被認定為$\frac{\kappa_p-\kappa_r}{\kappa_0-\kappa_r}$，$\kappa_0=\frac{\sum\limits_{i=1}^c{n_i(n_i-1)}}{N(N-1)}$，$c$是指字母表的長度(英文為$26$)，$N$指文本的長度，$n_1$到$n_c$是指密文的字母頻率，為整數。而這樣的試驗會隨著文本長度的增加而更為精確。</p>
+<h4 id="頻率分析"><a href="#頻率分析" class="headerlink" title="頻率分析"></a>頻率分析</h4><p>一旦能夠確定密鑰的長度，密文就能重新寫成多列，列數與密鑰長度對應。這樣每一列其實就是一個凱撒密碼，而此密碼的密鑰(偏移量)則對應於維吉尼亞密碼密鑰的相應字母。與破譯凱撒密碼類似的方法，就能將密文破譯。</p>
+<p>維吉尼亞密碼事實上還有許多種變體，但也隨著時間漸漸被破譯了，這裡就不再贅述。</p>
+<h3 id="攻擊工具-1"><a href="#攻擊工具-1" class="headerlink" title="攻擊工具"></a>攻擊工具</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://gchq.github.io/CyberChef/">CyberChef</a></li>
+<li><a target="_blank" rel="noopener" href="https://cryptii.com/pipes/vigenere-cipher">cryptii</a>：正規維吉尼亞密碼處理器</li>
+<li><a target="_blank" rel="noopener" href="https://www.guballa.de/vigenere-solver">vigenere-solver</a>：個人認為頗為強力的維吉尼亞密碼破譯工具</li>
+</ul>
+<p><strong>Python實作</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">enc</span>(<span class="params">raw, key</span>):</span><br><span class="line">    key_length = <span class="built_in">len</span>(key)</span><br><span class="line">    key_as_int = [<span class="built_in">ord</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> key]</span><br><span class="line">    raw_int = [<span class="built_in">ord</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> raw]</span><br><span class="line">    data = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(raw_int)):</span><br><span class="line">        value = (raw_int[i] + key_as_int[i % key_length]) % <span class="number">26</span></span><br><span class="line">        data += <span class="built_in">chr</span>(value + <span class="number">65</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dec</span>(<span class="params">raw, key</span>):</span><br><span class="line">    key_length = <span class="built_in">len</span>(key)</span><br><span class="line">    key_as_int = [<span class="built_in">ord</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> key]</span><br><span class="line">    raw_int = [<span class="built_in">ord</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> raw]</span><br><span class="line">    data = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(raw)):</span><br><span class="line">        value = (raw_int[i] - key_as_int[i % key_length]) % <span class="number">26</span></span><br><span class="line">        data += <span class="built_in">chr</span>(value + <span class="number">65</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line">raw = <span class="built_in">input</span>().upper() <span class="comment"># raw</span></span><br><span class="line">key = <span class="built_in">input</span>().upper() <span class="comment"># key</span></span><br><span class="line"><span class="built_in">print</span>(enc(raw, key))</span><br><span class="line"><span class="built_in">print</span>(dec(raw, key))</span><br></pre></td></tr></table></figure>
+
+<h2 id="Rail-Fence-Cipher"><a href="#Rail-Fence-Cipher" class="headerlink" title="Rail Fence Cipher"></a>Rail Fence Cipher</h2><p>鐵路柵欄密碼是一種經典的換位密碼。它的名字來自其加密的執行方式，類似於用水平欄杆建造的柵欄。如下所示：</p>
+<p><code>plaintext = &quot;M3t30r loves cryptography&quot; (空白忽略)</code><br><code>Rails = 4</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Rail 1： M.....l.....r.....r....</span><br><span class="line">Rail 2： .3...r.o...c.y...g.a...</span><br><span class="line">Rail 3： ..t.0...v.s...p.o...p.y</span><br><span class="line">Rail 4： ...3.....e.....t.....h.</span><br></pre></td></tr></table></figure>
+
+<p><code>ciphertext = &quot;Mlrr 3rocyga t0vspopy 3eth&quot;</code></p>
+<h3 id="攻擊手法-2"><a href="#攻擊手法-2" class="headerlink" title="攻擊手法"></a>攻擊手法</h3><p>只要知道柵欄的數目便能輕鬆解密原先內容(僅為換位)</p>
+<h3 id="攻擊工具-2"><a href="#攻擊工具-2" class="headerlink" title="攻擊工具"></a>攻擊工具</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.dcode.fr/rail-fence-cipher">dcode.fr</a>：可協助暴力搜尋柵欄數目</li>
+</ul>
+<h2 id="Bacon-Cipher"><a href="#Bacon-Cipher" class="headerlink" title="Bacon Cipher"></a>Bacon Cipher</h2><p>培根密碼是由法蘭西斯·培根發明的一種隱寫術。加密時，明文中的每個字母都會轉換成一組五個英文字母。其轉換依靠下表，本質上是利用<code>A</code>、<code>B</code>取代index二進位中的<code>0</code>、<code>1</code>：</p>
+<p><img src="https://i.imgur.com/dSqQTDj.png"></p>
+<h3 id="攻擊工具-3"><a href="#攻擊工具-3" class="headerlink" title="攻擊工具"></a>攻擊工具</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.dcode.fr/bacon-cipher">dcode.fr</a></li>
+</ul>
+<h2 id="Pigpen-Cipher"><a href="#Pigpen-Cipher" class="headerlink" title="Pigpen Cipher"></a>Pigpen Cipher</h2><p>豬圈密碼基本上是一種以格子為基礎的簡易替換密碼，對應的圖示如下所示：</p>
+<p><img src="https://i.imgur.com/RS0b7TY.png"></p>
+<h3 id="攻擊手法-3"><a href="#攻擊手法-3" class="headerlink" title="攻擊手法"></a>攻擊手法</h3><p>只要依據圖示逆回明文即可，十分簡單暴力</p>
+<h2 id="Affine-Cipher"><a href="#Affine-Cipher" class="headerlink" title="Affine Cipher"></a>Affine Cipher</h2><p>仿射密碼是將明文中字母對應成數字後，進行運算加密再對應回密文的一種模式，基本上運算式如下：</p>
+<p>$E_n(x)=ax+b$ $mod$ $m$<br>$D_n(x)=a^{-1}(x-b)$ $mod$ $m$，$a^{-1}=invese(a)$(僅在$(a,m)=1$時存在)</p>
+<p>而這種加密的轉換方式同樣被使用於線性同餘方法(LCG)，為偽隨機數生成器中的一種，稍後的文章中會提及它的攻擊手法，這裡就先稍稍帶過。</p>
+<h3 id="攻擊手法-4"><a href="#攻擊手法-4" class="headerlink" title="攻擊手法"></a>攻擊手法</h3><p>若可發現加密文件兩字元之原文，則關鍵值可透過解一方程組得到(二元一次方程組)。由於我們知道$a$及$m$互質，這個事實可被用於快速破解密碼。</p>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><p>對稱式加密的種類包羅萬象，未提及的還有包含<strong>Playfair Cipher、Dancing man、Braille</strong>等(詭異)的加密方法，但基本上在CTF競賽中通常都會出現代密碼，畢竟解密的步驟較為複雜，有時甚至需要跳脫性的思考，因此會考的古典密碼幾乎不存在，或是會出成很冷門的通靈題，出現的話通常靠的不會是大量的知識點，而是搜尋與通靈的能力，讀者若有興趣能夠自行再參閱相關的文章喔!</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:alb105322129@gmail.com">Albert Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://albert-notes.github.io/2023/01/26/ctf-crypto-1/">http://albert-notes.github.io/2023/01/26/ctf-crypto-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Security/">Security</a><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/Education/">Education</a><a class="post-meta__tags" href="/tags/Cryptography/">Cryptography</a></div><div class="post_share"><div class="social-share" data-image="/img/enc.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/01/24/ctf-web-1/"><img class="prev-cover" src="/img/sql.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">CTF系列-Web網路安全基礎I</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/01/24/ctf-web-1/" title="CTF系列-Web網路安全基礎I"><img class="cover" src="/img/sql.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-24</div><div class="title">CTF系列-Web網路安全基礎I</div></div></a></div><div><a href="/2022/06/11/AIS3-2022-preexam/" title="2022 AIS3 Pre-exam Write Up"><img class="cover" src="/img/ais2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-11</div><div class="title">2022 AIS3 Pre-exam Write Up</div></div></a></div><div><a href="/2021/06/06/AIS3-2021-preexam/" title="2021 AIS3 Pre-exam Write Up"><img class="cover" src="/img/ais.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-06</div><div class="title">2021 AIS3 Pre-exam Write Up</div></div></a></div><div><a href="/2021/06/06/myfirstctf-2021/" title="2021 MyFirstCTF Write Up"><img class="cover" src="/img/mfc.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-06</div><div class="title">2021 MyFirstCTF Write Up</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/alb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Albert Huang</div><div class="author-info__description">Decide your own life.</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">20</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/albert-notes"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/albert-notes" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:alb105322129@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.facebook.com/albert.huang.57/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a><a class="social-icon" href="https://www.instagram.com/albert.huang_57/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">《拓》 2022 全國高中生大合唱出爐囉 ! 趕快去 Music 分頁點播 !</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Encode-or-Encrypt"><span class="toc-number">1.</span> <span class="toc-text">Encode or Encrypt?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Encode"><span class="toc-number">2.</span> <span class="toc-text">Encode</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Morse-Code"><span class="toc-number">2.1.</span> <span class="toc-text">Morse Code</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Decode-Tools"><span class="toc-number">2.1.1.</span> <span class="toc-text">Decode Tools</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Base-X"><span class="toc-number">2.2.</span> <span class="toc-text">Base-X</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Decode-Tools-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">Decode Tools</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#uuencode"><span class="toc-number">2.3.</span> <span class="toc-text">uuencode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Decode-Tools-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">Decode Tools</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xxencode"><span class="toc-number">2.4.</span> <span class="toc-text">xxencode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Decode-Tools-3"><span class="toc-number">2.4.1.</span> <span class="toc-text">Decode Tools</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Encode"><span class="toc-number">2.5.</span> <span class="toc-text">URL Encode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Decode-Tools-4"><span class="toc-number">2.5.1.</span> <span class="toc-text">Decode Tools</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BrainFuck"><span class="toc-number">2.6.</span> <span class="toc-text">BrainFuck</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Compile-Tools"><span class="toc-number">2.6.1.</span> <span class="toc-text">Compile Tools</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSFuck"><span class="toc-number">2.7.</span> <span class="toc-text">JSFuck</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Compile-Tools-1"><span class="toc-number">2.7.1.</span> <span class="toc-text">Compile Tools</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#aaencode-jjencode"><span class="toc-number">2.8.</span> <span class="toc-text">aaencode&#x2F;jjencode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Compile-Tools-2"><span class="toc-number">2.8.1.</span> <span class="toc-text">Compile Tools</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B5%B1%E6%95%B4"><span class="toc-number">2.9.</span> <span class="toc-text">統整</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Classical-Cipher"><span class="toc-number">3.</span> <span class="toc-text">Classical Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Caesar-Cipher"><span class="toc-number">3.1.</span> <span class="toc-text">Caesar Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E6%93%8A%E6%89%8B%E6%B3%95"><span class="toc-number">3.1.1.</span> <span class="toc-text">攻擊手法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%AA%AE%E8%88%89-brute-force"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">暴力窮舉(brute force)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A9%9E%E9%A0%BB%E5%88%86%E6%9E%90-word-frequency-analysis"><span class="toc-number">3.1.1.2.</span> <span class="toc-text">詞頻分析(word frequency analysis)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E6%93%8A%E5%B7%A5%E5%85%B7"><span class="toc-number">3.1.2.</span> <span class="toc-text">攻擊工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vigenere-Cipher"><span class="toc-number">3.2.</span> <span class="toc-text">Vigenère Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E6%93%8A%E6%89%8B%E6%B3%95-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">攻擊手法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%A1%E8%A5%BF%E6%96%AF%E5%9F%BA%E8%A9%A6%E9%A9%97-Kasiski-examination"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">卡西斯基試驗(Kasiski examination)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%97%E9%87%8C%E5%BE%B7%E6%9B%BC%E8%A9%A6%E9%A9%97-Friedman-examination"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">弗里德曼試驗(Friedman examination)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A0%BB%E7%8E%87%E5%88%86%E6%9E%90"><span class="toc-number">3.2.1.3.</span> <span class="toc-text">頻率分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E6%93%8A%E5%B7%A5%E5%85%B7-1"><span class="toc-number">3.2.2.</span> <span class="toc-text">攻擊工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rail-Fence-Cipher"><span class="toc-number">3.3.</span> <span class="toc-text">Rail Fence Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E6%93%8A%E6%89%8B%E6%B3%95-2"><span class="toc-number">3.3.1.</span> <span class="toc-text">攻擊手法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E6%93%8A%E5%B7%A5%E5%85%B7-2"><span class="toc-number">3.3.2.</span> <span class="toc-text">攻擊工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bacon-Cipher"><span class="toc-number">3.4.</span> <span class="toc-text">Bacon Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E6%93%8A%E5%B7%A5%E5%85%B7-3"><span class="toc-number">3.4.1.</span> <span class="toc-text">攻擊工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pigpen-Cipher"><span class="toc-number">3.5.</span> <span class="toc-text">Pigpen Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E6%93%8A%E6%89%8B%E6%B3%95-3"><span class="toc-number">3.5.1.</span> <span class="toc-text">攻擊手法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Affine-Cipher"><span class="toc-number">3.6.</span> <span class="toc-text">Affine Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E6%93%8A%E6%89%8B%E6%B3%95-4"><span class="toc-number">3.6.1.</span> <span class="toc-text">攻擊手法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Others"><span class="toc-number">3.7.</span> <span class="toc-text">Others</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/01/26/ctf-crypto-1/" title="CTF系列-Cryptography密碼學基礎"><img src="/img/enc.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CTF系列-Cryptography密碼學基礎"/></a><div class="content"><a class="title" href="/2023/01/26/ctf-crypto-1/" title="CTF系列-Cryptography密碼學基礎">CTF系列-Cryptography密碼學基礎</a><time datetime="2023-01-26T14:58:44.000Z" title="Created 2023-01-26 22:58:44">2023-01-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/24/ctf-web-1/" title="CTF系列-Web網路安全基礎I"><img src="/img/sql.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CTF系列-Web網路安全基礎I"/></a><div class="content"><a class="title" href="/2023/01/24/ctf-web-1/" title="CTF系列-Web網路安全基礎I">CTF系列-Web網路安全基礎I</a><time datetime="2023-01-24T05:50:08.000Z" title="Created 2023-01-24 13:50:08">2023-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/11/AIS3-2022-preexam/" title="2022 AIS3 Pre-exam Write Up"><img src="/img/ais2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2022 AIS3 Pre-exam Write Up"/></a><div class="content"><a class="title" href="/2022/06/11/AIS3-2022-preexam/" title="2022 AIS3 Pre-exam Write Up">2022 AIS3 Pre-exam Write Up</a><time datetime="2022-06-11T00:40:08.000Z" title="Created 2022-06-11 08:40:08">2022-06-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/01/linear-algebra-3/" title="Linear Algebra III-Group"><img src="/img/mat2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linear Algebra III-Group"/></a><div class="content"><a class="title" href="/2022/02/01/linear-algebra-3/" title="Linear Algebra III-Group">Linear Algebra III-Group</a><time datetime="2022-02-01T02:02:45.000Z" title="Created 2022-02-01 10:02:45">2022-02-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/31/linear-algebra-2/" title="Linear Algebra II-Linear Algebra"><img src="/img/mat.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linear Algebra II-Linear Algebra"/></a><div class="content"><a class="title" href="/2022/01/31/linear-algebra-2/" title="Linear Algebra II-Linear Algebra">Linear Algebra II-Linear Algebra</a><time datetime="2022-01-31T06:02:44.000Z" title="Created 2022-01-31 14:02:44">2022-01-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Albert Huang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', '', 'katex-wrap')
+  })
+})()</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script src="//code.tidio.co/qqpjqsklrzstouh4l6ias23ukyxcbm3p.js" async></script><script src="/js/exten.js"></script><link rel="stylesheet" href="/css/exten.css"><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/mouse_snow.min.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="//code.tidio.co/qqpjqsklrzstouh4l6ias23ukyxcbm3p.js" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
