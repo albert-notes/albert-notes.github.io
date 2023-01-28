@@ -272,7 +272,21 @@
 
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Literature/</loc>
+    <loc>http://albert-notes.github.io/tags/AIS3/</loc>
+    <lastmod>2023-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/Security/</loc>
+    <lastmod>2023-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/CTF/</loc>
     <lastmod>2023-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -300,21 +314,7 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/AIS3/</loc>
-    <lastmod>2023-01-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/Security/</loc>
-    <lastmod>2023-01-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/CTF/</loc>
+    <loc>http://albert-notes.github.io/tags/Literature/</loc>
     <lastmod>2023-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -414,7 +414,7 @@
 
   
   <url>
-    <loc>http://albert-notes.github.io/categories/Literature/</loc>
+    <loc>http://albert-notes.github.io/categories/Computer-Science/</loc>
     <lastmod>2023-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -428,7 +428,7 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/categories/Computer-Science/</loc>
+    <loc>http://albert-notes.github.io/categories/Literature/</loc>
     <lastmod>2023-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
