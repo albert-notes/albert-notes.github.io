@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CTF系列-Cryptography密碼學進階I | M3t30r</title><meta name="keywords" content="Security,CTF,Education,Cryptography"><meta name="author" content="Albert Huang,alb105322129@gmail.com"><meta name="copyright" content="Albert Huang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="上一篇Crypto介紹了編碼與古典密碼學的部分，接下來要進入相對複雜不少的現代密碼學囉!現代密碼學的種類繁多，如DES、AES、RSA等都被歸類於現代密碼，非對稱式的加密模式也使攻擊者解密的難度大大增加，究竟現在發展出了哪些攻擊方法來攻擊這些看起來堅不可摧的加密法呢？一起來看看進階的密碼學吧!歡迎各位來訊說明或補充筆者不足的部分喔!😊 Block Cipher在進入現代密碼學之前，必須先了解區塊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF系列-Cryptography密碼學進階I">
+<meta property="og:url" content="http://albert-notes.github.io/2023/01/28/ctf-crypto-2/index.html">
+<meta property="og:site_name" content="M3t30r">
+<meta property="og:description" content="上一篇Crypto介紹了編碼與古典密碼學的部分，接下來要進入相對複雜不少的現代密碼學囉!現代密碼學的種類繁多，如DES、AES、RSA等都被歸類於現代密碼，非對稱式的加密模式也使攻擊者解密的難度大大增加，究竟現在發展出了哪些攻擊方法來攻擊這些看起來堅不可摧的加密法呢？一起來看看進階的密碼學吧!歡迎各位來訊說明或補充筆者不足的部分喔!😊 Block Cipher在進入現代密碼學之前，必須先了解區塊">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://albert-notes.github.io/img/cgy.jpg">
+<meta property="article:published_time" content="2023-01-28T13:41:20.000Z">
+<meta property="article:modified_time" content="2023-01-28T13:50:37.462Z">
+<meta property="article:author" content="Albert Huang">
+<meta property="article:tag" content="Security">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Education">
+<meta property="article:tag" content="Cryptography">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://albert-notes.github.io/img/cgy.jpg"><link rel="shortcut icon" href="/img/fav.ico"><link rel="canonical" href="http://albert-notes.github.io/2023/01/28/ctf-crypto-2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-28 21:50:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="M3t30r" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/alb.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/videos/"><i class="fa-fw fas fa-desktop"></i><span> Videos</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/certificates/"><i class="fa-fw fas fa-certificate"></i><span> Certificates</span></a></div><div class="menus_item"><a class="site-page" href="/resources/"><i class="fa-fw fas fa-lightbulb"></i><span> Resources</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-address-card"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cgy.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">M3t30r</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/videos/"><i class="fa-fw fas fa-desktop"></i><span> Videos</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/certificates/"><i class="fa-fw fas fa-certificate"></i><span> Certificates</span></a></div><div class="menus_item"><a class="site-page" href="/resources/"><i class="fa-fw fas fa-lightbulb"></i><span> Resources</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-address-card"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CTF系列-Cryptography密碼學進階I</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-01-28T13:41:20.000Z" title="Created 2023-01-28 21:41:20">2023-01-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-01-28T13:50:37.462Z" title="Updated 2023-01-28 21:50:37">2023-01-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/">CTF</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>12min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CTF系列-Cryptography密碼學進階I"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>上一篇Crypto介紹了編碼與古典密碼學的部分，接下來要進入相對複雜不少的現代密碼學囉!現代密碼學的種類繁多，如DES、AES、RSA等都被歸類於現代密碼，非對稱式的加密模式也使攻擊者解密的難度大大增加，究竟現在發展出了哪些攻擊方法來攻擊這些看起來堅不可摧的加密法呢？一起來看看進階的密碼學吧!歡迎各位來訊說明或補充筆者不足的部分喔!😊</p>
+<h1 id="Block-Cipher"><a href="#Block-Cipher" class="headerlink" title="Block Cipher"></a>Block Cipher</h1><p>在進入現代密碼學之前，必須先了解區塊密碼的實現原理，DES、AES等高階密碼都有使用到這種方式來確保加密的安全性。Block Cipher可以被視為一種特殊的替代密碼，但一次替代的是一個區塊，而非一個字元。由於明文的長度非常大，因此對於不同的key，無法以對應表的方式處理加解密，僅能透過特殊的演算法來還原明文。</p>
+<p>Block Cipher允許透過單一key對長度大於其的明文進行加密，但必須先將明文依照密鑰長度進行分塊，最後不足密鑰長度的區塊須以特殊的填充方法(padding)使其與其他區塊的長度相同(可攻擊的點，稍後說明)，因此命名為區塊密碼。通常在加密前會先有一個初始向量(Initial Vector，$IV$)來對原始的第一塊明文進行處理，以確保第一塊明文不會被輕易破解，而第一塊處理完成的密文則會成為第二塊明文的$IV$，以此類推完成整個加密過程。以下則是五種常見的區塊密碼模式。</p>
+<h2 id="Electronic-CodeBook-ECB"><a href="#Electronic-CodeBook-ECB" class="headerlink" title="Electronic CodeBook (ECB)"></a>Electronic CodeBook (ECB)</h2><p>ECB是區塊密碼最簡單的一種模式，這種模式沒有初始向量，直接以密鑰對明文進行加密後輸出，這也意味著若是有區塊為相同的明文，將被加密成為相同的密文塊，因此最容易被攻擊。詳細加密的邏輯如下：</p>
+<p>$C_i=E(P_i)$<br>$P_i=D(C_i)$</p>
+<p><img src="https://i.imgur.com/ozcGBMg.png"></p>
+<h2 id="Cipher-Block-Chaining-CBC"><a href="#Cipher-Block-Chaining-CBC" class="headerlink" title="Cipher Block Chaining (CBC)"></a>Cipher Block Chaining (CBC)</h2><p>CBC模式中與ECB不同的地方在於，分塊後的明文會先與特定密文進行XOR後再進行加密處理，第一塊與$IV$ XOR，其餘與前一塊所產生的密文XOR。假設第一個區塊的index為1，CBC的加解密能夠被表示為：</p>
+<p>$C_0=IV…C_i=E_n(P_i⊕C_{i-1})$<br>$C_0=IV…P_i=D_n(C_i)⊕C_{i-1}$</p>
+<p><img src="https://i.imgur.com/PjhOInW.png"></p>
+<p>其中一種最常見的攻擊手法簡單來說會是利用改變某一位密文導致的解密錯誤來試出正確的明文，後面會再詳細說明。</p>
+<h2 id="Output-FeedBack-OFB"><a href="#Output-FeedBack-OFB" class="headerlink" title="Output FeedBack (OFB)"></a>Output FeedBack (OFB)</h2><p>OFB與前面兩種模式又不同了，他是使用$IV$來進行加密，產出$IV$的密文後再與第一塊明文進行XOR，同時這個中介密文會成為下一個加密的輸入。基於XOR的特性$A⊕B=C\implies A=B⊕C，B=A⊕C$，OFB模式下的加解密操作會完全相同。詳細概念如下：</p>
+<p>$O_0=IV…O_i=E(O_{i-1})$<br>$C_i=P_i⊕O_i$，$P_i=C_i⊕O_i$</p>
+<p><img src="https://i.imgur.com/iXlw2Pa.png"></p>
+<p>由於OFB的工作模式類似流密碼，因此在改變一位密文時也只會改變一位的解密結果，安全性相較ECB與CBC高上許多。</p>
+<h2 id="Cipher-FeedBack-CFB"><a href="#Cipher-FeedBack-CFB" class="headerlink" title="Cipher FeedBack (CFB)"></a>Cipher FeedBack (CFB)</h2><p>CFB的型態與OFB幾乎相同，唯一的差別是OFB拿來成為下一塊加密輸入的是IV的加密流，而CFB則是取前一塊的最終密文。詳細說明如下：</p>
+<p>$C_0=IV$<br>$C_i=P_i⊕E(C_{i-1})$<br>$P_i=C_i⊕E(C_{i-1})$</p>
+<p><img src="https://i.imgur.com/RpzGR9T.png"></p>
+<p>由於取用的關聯性變複雜了，CFB的安全性稍稍高於OFB，但基本上沒有太大的差別。</p>
+<h2 id="Counter-Mode-CTR"><a href="#Counter-Mode-CTR" class="headerlink" title="Counter Mode (CTR)"></a>Counter Mode (CTR)</h2><p>最後是CTR，基本上它可以被理解為OFB的變形，首先一個固定的$Nonce$(可以視為$IV$)與計數器$Counter$透過加密者希望的方式連接，而計數器如何計數也能夠由加者者自行決定，下方以正規計數器的模式作為範例。其中計數器存在的目的為保證長時間的加密不重複輸出。而接著將$Nonce$與$Counter$組合出的字串加密後與明文XOR進行加密處理。詳細情況如下：</p>
+<p>$O_i=Nonce$ $..$ $Counter_i$<br>$C_i=P_i⊕O_i，P_i=C_i⊕O_i$</p>
+<p><img src="https://i.imgur.com/Gxb5CrH.png"></p>
+<p>因為$Nonce$與$Counter$基本上在每一塊的連接上會有關聯性，因此可以將其視為金鑰流(flow)，且實作上又比OFB更加複雜，目前幾乎可以保證安全性。</p>
+<h1 id="Feistel-Cipher"><a href="#Feistel-Cipher" class="headerlink" title="Feistel Cipher"></a>Feistel Cipher</h1><p>費斯妥密碼是分組密碼最常使用的一種加密方案，包含了稍後會提到的DES(Data Encryption Standard，資料加密標準)，其優點在於加密與解密的過程十分類似，在某些程序中甚至完全相同，只需要逆向操作即可。</p>
+<p>費斯妥密碼的加密過程會先將明文塊拆分為兩個等長的塊$(L_0,R_0)$，對單一區塊加密$n$次，使用$F$作為內部函數(各種Block Cipher Encryption更改的地方)(不須可逆)，且令每一步所使用的密鑰為$K_0,K_1…K_n$，第一次使用$R_0$作為輸入、$K_0$作為密鑰進行加密，密文與$L_0$XOR之後作為下一次加密的輸入，$R_0$則直接下放成為與下次密文XOR的對象，簡而言之就是$L$與$R$的角色互換，如此進行$n$次後將兩者合併作為輸出，因此圖案會是連續左右交錯的$X$型。以數學則可表為遞迴表達式：</p>
+<p>$L_{i+1}=R_i$<br>$R_{i+1}=L_i⊕F(R_i,K_i)$</p>
+<p>解密則十分類似，僅是將加密的過程反向做一次而已(利用XOR的可逆性)。</p>
+<p>$R_i=L_{i+1}$<br>$L_i=R_{i+1}⊕F(L_{i+1},K_i)$</p>
+<p><img src="https://i.imgur.com/3COHa7D.png"></p>
+<p>因為$F$函數的不可預測性，攻擊者基本上無法以這個地方作為切入點發動攻擊。</p>
+<h1 id="DES"><a href="#DES" class="headerlink" title="DES"></a>DES</h1><p>終於要隆重介紹今天的主角DES了～DES是一種對稱式密鑰加密塊密碼演算法(它是對稱是加密唷!)，它其實是一個向大眾徵集足夠嚴謹加密算法的產物，最初期的草稿由IBM公司設計，1976年被美國聯邦政府的國家標準局確定為聯邦資料處理標準(FIPS)，隨後在國際上廣泛流傳開來。它的基本金鑰是56bit，由於是由美國國家機關發出，金鑰長度又相對較短，被懷疑內含美國國安局NSA的後門(sbox等置換表)，剛推出時受到了嚴密審查，也因而被公認是推動Block Cipher發展的一套加密方法。</p>
+<p>DES現今已不是安全的加密模式，主因為其使用的56bit金鑰過短，在1999年時就曾經有全新的加密內容在一天內被破解。在安全性的考量上，可以使用DES的衍生演算法3DES來進行加密，雖然3DES也存在理論上的攻擊方法，後面會提及如何攻擊。也基於DES的不安全，它的進階加密方法AES也在數年後出現，將在下一個段落詳細介紹。</p>
+<p>DES在加密的過程中將會有五個主要步驟，以下將逐一說明。</p>
+<h2 id="Initial-Permutation-IP"><a href="#Initial-Permutation-IP" class="headerlink" title="Initial Permutation (IP)"></a>Initial Permutation (IP)</h2><p>初始置換是DES的第一步，以64bit的明文為基準，分為一或多個明文區塊，每個明文區塊有64bit(不足補0)，且會依照以下表格進行置換，通稱為<strong>IP</strong>表：</p>
+<p><img src="https://i.imgur.com/s2qkXP9.png"></p>
+<p>如上所示，明文的第58位會被置換到IP表的第1位，而明文的第50位會被置換到IP表的第二位，以此類推完成整張IP表。</p>
+<h2 id="Subkey’s-Generation"><a href="#Subkey’s-Generation" class="headerlink" title="Subkey’s Generation"></a>Subkey’s Generation</h2><p>DES函數在加密時會傳入一個64bit的原始key，而這個原始key並不會被直接利用在加密中，而是先產生16組子金鑰。第零組子金鑰(不使用)的來源為以下這個表格的置換，本質上與IP表的置換原理完全一樣，這張表格稱為<strong>PC-1</strong>(Permuted choice 1)：</p>
+<p><img src="https://i.imgur.com/sIGFEFN.png"></p>
+<div class="note warning flat"><p>有發現表格中只剩下56格嗎?其實第<code>8,16,24,32,40,48,56,64</code>位這8位的key被指定作為**奇偶校驗位(parity bit)**，因此不會出現在表格中喔!</p>
+</div>
+
+<p>接著我們從左半金鑰置換表與右半金鑰置換表中，能夠得到兩個部分的金鑰$C_0$與$D_0$，接著在對其做出一個循環左移的操作，連續16次即可獲得$C_1$～$C_{16}$與$D_1$～$D_{16}$的值，其中在每次互換中的左移位數分別為：</p>
+<p><img src="https://i.imgur.com/Cw4N5s4.png"><br>(上為index，下為左移位數)</p>
+<p>接著將每組$C_i$與$D_i$組合完成，產生16組56位的次金鑰，最後再以另一張表格選出48位完成16組金鑰$K_1$～$K_{16}$最終置換，這張表格稱為<strong>PC-2</strong>(Permuted choice 2)：</p>
+<p><img src="https://i.imgur.com/DeYRt66.png"></p>
+<div class="note warning flat"><p>這次忽略的位數與上面稍有不同，為第<code>9,18,22,25,35,38,43,54</code>位。</p>
+</div>
+
+<h2 id="Encryption"><a href="#Encryption" class="headerlink" title="Encryption"></a>Encryption</h2><p>這個步驟就是應用到費斯妥密碼的想法所在了，前一個步驟產生了16種不同的金鑰，將會利用前面所提到的費斯妥密碼邏輯，一共重複16次來進行加密。而以下將詳細說明DES自訂的費斯妥函數$F$是如何運作的。</p>
+<h3 id="費斯妥函數-F"><a href="#費斯妥函數-F" class="headerlink" title="費斯妥函數$F$"></a>費斯妥函數$F$</h3><p>DES的$F$函數作用概念如下所示：</p>
+<p><img src="https://i.imgur.com/ZX9eIxi.png"></p>
+<p>前面有提到，費斯妥函數的輸入會是明文塊的其中一半與金鑰，如上所示。首先一半的明文$R_0$會先經過擴張置換$E$從32bit擴張到48bit(為了之後與48bit的密鑰XOR)，置換表格如下：</p>
+<p><img src="https://i.imgur.com/DU8o7jV.png"></p>
+<div class="note warning flat"><p>其中數位的明文重複出現，使輸出包括8個6bit的塊，每塊包含兩個上一列中曾經出現的最後兩位作為開頭，加上4bit對應的輸入位。</p>
+</div>
+
+<p>明文置換完成後，會與$K_0$進行XOR後形成中介密文，接著依照位數分別進入8個sbox(置換盒)$S_1$～$S_8$中進行處理(查表)，每個sbox處理6位，處理後輸出4位。sbox被認定提供了DES的核心安全性，若沒有sbox，密碼會是線性的，很容易被破解。$S_1$～$S_8$的置換表如下：</p>
+<p><img src="https://i.imgur.com/okH2uix.png"><br><img src="https://i.imgur.com/h9n06K7.png"></p>
+<p>以<code>110101</code>作為$S_1$範例輸入，其符合<code>1XXXX1</code>與<code>X1010X</code>的對應，對應出的數字為<code>3</code>，即4bit的二進位數值<code>0011</code>，傳出<code>0011</code>作為輸出，以此類推，將$S_1$～$S_8$都以此方式產生輸出，拼湊產生共32bit的中介密文。</p>
+<p>最後將這32bit的中介密文送進一個稱為<strong>P</strong>的置換表再次置換後完成$F$函數的作用。<strong>P</strong>置換表如下：</p>
+<p><img src="https://i.imgur.com/CXhFpPb.png"></p>
+<p>完成$F$函數作用，接著重複16次費斯妥密碼程序後完成加密處理步驟，獲得64位元的密文。其中這三個子步驟皆符合實用密碼所需的必要條件-<strong>混淆與擴散(confusion and diffusion)</strong></p>
+<h2 id="Final-Permutation-FP"><a href="#Final-Permutation-FP" class="headerlink" title="Final Permutation (FP)"></a>Final Permutation (FP)</h2><p>最後一個步驟事實上是第一步IP的逆處理，因此FP也被稱為<code>inverse(IP)</code>，處理的表格可以IP的表格推出，如下所示：</p>
+<p><img src="https://i.imgur.com/chifYlN.png"></p>
+<p>至此完成整個DES加密，輸出64bit的最終密文，若有下一塊明文則以使用者選擇的Block Cipher模式連結到下一個明文塊進行加密。P.S.這種加密真麻煩XD</p>
+<p>若想完整了解Python的實作方式可參考<a target="_blank" rel="noopener" href="https://github.com/dkushagra/DES-Python/blob/master/DES.py">此網站</a></p>
+<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><p>雖然DES最早被發現，研究它的論文也不在少數，但截至目前為止，暴力破解仍是解開DES最有效的方法(btw量子電腦的出現可能會改變這個事實)，曾經有三種發表的攻擊方法其時間複雜度$O$小於暴力破解，但因為需要大量的額外資訊($2^{43}$個以上的明文數量)，因此實用價值不高。</p>
+<h2 id="Triple-DES"><a href="#Triple-DES" class="headerlink" title="Triple DES"></a>Triple DES</h2><p>3DES，又稱TDEA(Triple Data Encryption Algorithm)，是DES在被發現不安全後產生的加強版，基本上就是重複利用DES演算法的一種模式，由於電腦運算能力的增強，原版DES由於金鑰長度過低容易被暴力破解，因此3DES利用三個不同的密鑰來對明文加密。詳細演算法如下，$K_1$～$K_3$為三把不同的金鑰：</p>
+<p>$C=E_{K_1}(D_{K_2}(E_{K_3}(P)))$<br>$P=D_{K_3}(E_{K_2}(D_{K_1}(C)))$</p>
+<p>是的你沒看錯，3DES的全加密演算法是使用$K_1$為金鑰進行DES加密，再用$K_2$為金鑰進行DES<strong>解密</strong>，最後以$K_3$進行DES加密。反之，3DES的全解密演算法則是先使用$K_3$為金鑰進行DES解密，再用$K_2$為金鑰進行DES<strong>加密</strong>，最後以$K_1$進行DES解密得到明文。</p>
+<h3 id="Keying-Options"><a href="#Keying-Options" class="headerlink" title="Keying Options"></a>Keying Options</h3><p>3DES的標準定義規範了三種金鑰選項，其中第二種及第三種已經因安全性的問題遭棄用(但可能出現在CTF競賽中)，如下所示。</p>
+<h4 id="Keying-Option-I"><a href="#Keying-Option-I" class="headerlink" title="Keying Option I"></a>Keying Option I</h4><ul>
+<li>別名：3TDEA、三倍長度金鑰(triple-length keys)</li>
+<li>簡而言之，三把金鑰$K_1$、$K_2$、$K_3$兩兩獨立，互不影響。</li>
+<li>有$56\times 3=168$個獨立金鑰位，安全性最高。</li>
+<li>可能被<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">中間人攻擊(MITM)</a>，故有效安全金鑰位僅有$56\times 2=112$位。</li>
+</ul>
+<h4 id="Keying-Option-II"><a href="#Keying-Option-II" class="headerlink" title="Keying Option II"></a>Keying Option II</h4><ul>
+<li>別名：2TDEA、雙倍長度金鑰(double-length keys)</li>
+<li>$K_1$與$K_2$相互獨立，且$K_1=K_3$。</li>
+<li>有$56\times 2=112$個獨立金鑰位，雖然安全強度大於單獨使用兩次DES(double DES)(2TDEA可抵禦中間人攻擊(MITM))，但仍因金鑰長度不足而被棄用。</li>
+</ul>
+<h4 id="Keying-Option-III"><a href="#Keying-Option-III" class="headerlink" title="Keying Option III"></a>Keying Option III</h4><ul>
+<li>$K_1=K_2=K_3$</li>
+<li>此選項等同single DES，僅有$56\times 1=56$個獨立金鑰位，前兩步等同無效，安全性最低，因金鑰長度不足而被棄用。</li>
+</ul>
+<h3 id="Security-1"><a href="#Security-1" class="headerlink" title="Security"></a>Security</h3><p>3TDEA提供了112位的有效金鑰位，據<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/3DES">資料</a>顯示其最佳化的攻擊仍需要$2^{32}$組額外明文、$2^{113}$步、$2^{90}$次DES加密與$2^{88}bit$的記憶體，這在目前的現實電腦仍是無稽之談，因此安全性仍舊存在，目前正在觀察量子電腦的進展，未來有機會攻破這個限制。而2TDEA雖然表面上也有112位的有效金鑰位，但其對於特定的明文攻擊強度較弱，因此被認定僅有約80位的有效金鑰位安全性。</p>
+<h2 id="統整"><a href="#統整" class="headerlink" title="統整"></a>統整</h2><p>DES目前在特定條件下仍舊存在一定的安全性，但受到電腦效能的持續突破，防範暴力攻擊的能力已經不如以往，因此在其之後發展出了AES來替代它，但AES在密鑰不安全下所存在的漏洞並不亞於DES，下一篇將介紹AES與講解其之常見攻擊模式，敬請期待～</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:alb105322129@gmail.com">Albert Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://albert-notes.github.io/2023/01/28/ctf-crypto-2/">http://albert-notes.github.io/2023/01/28/ctf-crypto-2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Security/">Security</a><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/Education/">Education</a><a class="post-meta__tags" href="/tags/Cryptography/">Cryptography</a></div><div class="post_share"><div class="social-share" data-image="/img/cgy.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/01/26/ctf-crypto-1/"><img class="prev-cover" src="/img/enc.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">CTF系列-Cryptography密碼學基礎</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2023/01/26/ctf-crypto-1/" title="CTF系列-Cryptography密碼學基礎"><img class="cover" src="/img/enc.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-26</div><div class="title">CTF系列-Cryptography密碼學基礎</div></div></a></div><div><a href="/2023/01/24/ctf-web-1/" title="CTF系列-Web網路安全基礎I"><img class="cover" src="/img/sql.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-24</div><div class="title">CTF系列-Web網路安全基礎I</div></div></a></div><div><a href="/2022/06/11/AIS3-2022-preexam/" title="2022 AIS3 Pre-exam Write Up"><img class="cover" src="/img/ais2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-11</div><div class="title">2022 AIS3 Pre-exam Write Up</div></div></a></div><div><a href="/2021/06/06/AIS3-2021-preexam/" title="2021 AIS3 Pre-exam Write Up"><img class="cover" src="/img/ais.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-06</div><div class="title">2021 AIS3 Pre-exam Write Up</div></div></a></div><div><a href="/2021/06/06/myfirstctf-2021/" title="2021 MyFirstCTF Write Up"><img class="cover" src="/img/mfc.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-06</div><div class="title">2021 MyFirstCTF Write Up</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/alb.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Albert Huang</div><div class="author-info__description">Decide your own life.</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">18</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">20</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">7</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/albert-notes"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/albert-notes" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:alb105322129@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.facebook.com/albert.huang.57/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a><a class="social-icon" href="https://www.instagram.com/albert.huang_57/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">《拓》 2022 全國高中生大合唱出爐囉 ! 趕快去 Music 分頁點播 !</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Block-Cipher"><span class="toc-number">1.</span> <span class="toc-text">Block Cipher</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Electronic-CodeBook-ECB"><span class="toc-number">1.1.</span> <span class="toc-text">Electronic CodeBook (ECB)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cipher-Block-Chaining-CBC"><span class="toc-number">1.2.</span> <span class="toc-text">Cipher Block Chaining (CBC)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Output-FeedBack-OFB"><span class="toc-number">1.3.</span> <span class="toc-text">Output FeedBack (OFB)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cipher-FeedBack-CFB"><span class="toc-number">1.4.</span> <span class="toc-text">Cipher FeedBack (CFB)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Counter-Mode-CTR"><span class="toc-number">1.5.</span> <span class="toc-text">Counter Mode (CTR)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Feistel-Cipher"><span class="toc-number">2.</span> <span class="toc-text">Feistel Cipher</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DES"><span class="toc-number">3.</span> <span class="toc-text">DES</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Initial-Permutation-IP"><span class="toc-number">3.1.</span> <span class="toc-text">Initial Permutation (IP)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Subkey%E2%80%99s-Generation"><span class="toc-number">3.2.</span> <span class="toc-text">Subkey’s Generation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Encryption"><span class="toc-number">3.3.</span> <span class="toc-text">Encryption</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B2%BB%E6%96%AF%E5%A6%A5%E5%87%BD%E6%95%B8-F"><span class="toc-number">3.3.1.</span> <span class="toc-text">費斯妥函數$F$</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Final-Permutation-FP"><span class="toc-number">3.4.</span> <span class="toc-text">Final Permutation (FP)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Security"><span class="toc-number">3.5.</span> <span class="toc-text">Security</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Triple-DES"><span class="toc-number">3.6.</span> <span class="toc-text">Triple DES</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Keying-Options"><span class="toc-number">3.6.1.</span> <span class="toc-text">Keying Options</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Keying-Option-I"><span class="toc-number">3.6.1.1.</span> <span class="toc-text">Keying Option I</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Keying-Option-II"><span class="toc-number">3.6.1.2.</span> <span class="toc-text">Keying Option II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Keying-Option-III"><span class="toc-number">3.6.1.3.</span> <span class="toc-text">Keying Option III</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Security-1"><span class="toc-number">3.6.2.</span> <span class="toc-text">Security</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B5%B1%E6%95%B4"><span class="toc-number">3.7.</span> <span class="toc-text">統整</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/01/28/ctf-crypto-2/" title="CTF系列-Cryptography密碼學進階I"><img src="/img/cgy.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CTF系列-Cryptography密碼學進階I"/></a><div class="content"><a class="title" href="/2023/01/28/ctf-crypto-2/" title="CTF系列-Cryptography密碼學進階I">CTF系列-Cryptography密碼學進階I</a><time datetime="2023-01-28T13:41:20.000Z" title="Created 2023-01-28 21:41:20">2023-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/26/ctf-crypto-1/" title="CTF系列-Cryptography密碼學基礎"><img src="/img/enc.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CTF系列-Cryptography密碼學基礎"/></a><div class="content"><a class="title" href="/2023/01/26/ctf-crypto-1/" title="CTF系列-Cryptography密碼學基礎">CTF系列-Cryptography密碼學基礎</a><time datetime="2023-01-26T14:58:44.000Z" title="Created 2023-01-26 22:58:44">2023-01-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/24/ctf-web-1/" title="CTF系列-Web網路安全基礎I"><img src="/img/sql.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CTF系列-Web網路安全基礎I"/></a><div class="content"><a class="title" href="/2023/01/24/ctf-web-1/" title="CTF系列-Web網路安全基礎I">CTF系列-Web網路安全基礎I</a><time datetime="2023-01-24T05:50:08.000Z" title="Created 2023-01-24 13:50:08">2023-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/11/AIS3-2022-preexam/" title="2022 AIS3 Pre-exam Write Up"><img src="/img/ais2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2022 AIS3 Pre-exam Write Up"/></a><div class="content"><a class="title" href="/2022/06/11/AIS3-2022-preexam/" title="2022 AIS3 Pre-exam Write Up">2022 AIS3 Pre-exam Write Up</a><time datetime="2022-06-11T00:40:08.000Z" title="Created 2022-06-11 08:40:08">2022-06-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/01/linear-algebra-3/" title="Linear Algebra III-Group"><img src="/img/mat2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linear Algebra III-Group"/></a><div class="content"><a class="title" href="/2022/02/01/linear-algebra-3/" title="Linear Algebra III-Group">Linear Algebra III-Group</a><time datetime="2022-02-01T02:02:45.000Z" title="Created 2022-02-01 10:02:45">2022-02-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Albert Huang</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.css"><script>(() => {
+  document.querySelectorAll('#article-container span.katex-display').forEach(item => {
+    btf.wrap(item, 'div', '', 'katex-wrap')
+  })
+})()</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><script src="//code.tidio.co/qqpjqsklrzstouh4l6ias23ukyxcbm3p.js" async></script><script src="/js/exten.js"></script><link rel="stylesheet" href="/css/exten.css"><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/mouse_snow.min.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script src="//code.tidio.co/qqpjqsklrzstouh4l6ias23ukyxcbm3p.js" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
