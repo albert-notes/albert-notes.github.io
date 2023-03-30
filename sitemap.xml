@@ -311,13 +311,6 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Literature/</loc>
-    <lastmod>2023-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/tags/Biology/</loc>
     <lastmod>2023-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -333,6 +326,13 @@
   
   <url>
     <loc>http://albert-notes.github.io/tags/Immunity/</loc>
+    <lastmod>2023-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/Literature/</loc>
     <lastmod>2023-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -360,13 +360,6 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/YMMC/</loc>
-    <lastmod>2023-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/tags/Education/</loc>
     <lastmod>2023-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -381,6 +374,13 @@
   </url>
   
   <url>
+    <loc>http://albert-notes.github.io/tags/YMMC/</loc>
+    <lastmod>2023-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://albert-notes.github.io/tags/Reverse-Engineering/</loc>
     <lastmod>2023-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -388,21 +388,14 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Linear-Algebra/</loc>
-    <lastmod>2023-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/College/</loc>
-    <lastmod>2023-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/tags/Fibonacci-Sequence/</loc>
+    <lastmod>2023-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/Linear-Algebra/</loc>
     <lastmod>2023-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -417,6 +410,13 @@
   
   <url>
     <loc>http://albert-notes.github.io/tags/Generating-Function/</loc>
+    <lastmod>2023-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/College/</loc>
     <lastmod>2023-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -453,13 +453,6 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/categories/Literature/</loc>
-    <lastmod>2023-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/categories/Biology/</loc>
     <lastmod>2023-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -467,7 +460,7 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/categories/YMMC/</loc>
+    <loc>http://albert-notes.github.io/categories/Literature/</loc>
     <lastmod>2023-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -475,6 +468,13 @@
   
   <url>
     <loc>http://albert-notes.github.io/categories/CTF/</loc>
+    <lastmod>2023-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/categories/YMMC/</loc>
     <lastmod>2023-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
