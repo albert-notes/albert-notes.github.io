@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://albert-notes.github.io/2023/05/27/AIS3-2023-preexam/</loc>
+    <loc>http://albert-notes.github.io/about/index.html</loc>
     
     <lastmod>2023-05-29</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/about/index.html</loc>
+    <loc>http://albert-notes.github.io/2023/05/27/AIS3-2023-preexam/</loc>
     
-    <lastmod>2023-05-15</lastmod>
+    <lastmod>2023-05-29</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -299,27 +299,6 @@
 
   
   <url>
-    <loc>http://albert-notes.github.io/tags/AIS3/</loc>
-    <lastmod>2023-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/Security/</loc>
-    <lastmod>2023-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/CTF/</loc>
-    <lastmod>2023-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/tags/Biology/</loc>
     <lastmod>2023-05-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -335,6 +314,27 @@
   
   <url>
     <loc>http://albert-notes.github.io/tags/Immunity/</loc>
+    <lastmod>2023-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/AIS3/</loc>
+    <lastmod>2023-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/Security/</loc>
+    <lastmod>2023-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/CTF/</loc>
     <lastmod>2023-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -369,13 +369,6 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/SARS-Cov-2/</loc>
-    <lastmod>2023-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/tags/Education/</loc>
     <lastmod>2023-05-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -390,7 +383,7 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Web/</loc>
+    <loc>http://albert-notes.github.io/tags/SARS-Cov-2/</loc>
     <lastmod>2023-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -425,7 +418,7 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Reverse-Engineering/</loc>
+    <loc>http://albert-notes.github.io/tags/Web/</loc>
     <lastmod>2023-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -452,17 +445,24 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>http://albert-notes.github.io/tags/Reverse-Engineering/</loc>
+    <lastmod>2023-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
-    <loc>http://albert-notes.github.io/categories/Computer-Science/</loc>
+    <loc>http://albert-notes.github.io/categories/Biology/</loc>
     <lastmod>2023-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/categories/Biology/</loc>
+    <loc>http://albert-notes.github.io/categories/Computer-Science/</loc>
     <lastmod>2023-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
