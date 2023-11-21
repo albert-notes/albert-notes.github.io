@@ -299,6 +299,27 @@
 
   
   <url>
+    <loc>http://albert-notes.github.io/tags/Biology/</loc>
+    <lastmod>2023-11-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/Medical/</loc>
+    <lastmod>2023-11-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/Immunity/</loc>
+    <lastmod>2023-11-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://albert-notes.github.io/tags/AIS3/</loc>
     <lastmod>2023-11-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -327,27 +348,6 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Biology/</loc>
-    <lastmod>2023-11-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/Medical/</loc>
-    <lastmod>2023-11-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/Immunity/</loc>
-    <lastmod>2023-11-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/tags/Quantum-Computing/</loc>
     <lastmod>2023-11-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -369,13 +369,6 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/YMMC/</loc>
-    <lastmod>2023-11-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/tags/Education/</loc>
     <lastmod>2023-11-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -383,7 +376,28 @@
   </url>
   
   <url>
+    <loc>http://albert-notes.github.io/tags/Cryptography/</loc>
+    <lastmod>2023-11-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/YMMC/</loc>
+    <lastmod>2023-11-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://albert-notes.github.io/tags/Web/</loc>
+    <lastmod>2023-11-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://albert-notes.github.io/tags/Reverse-Engineering/</loc>
     <lastmod>2023-11-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -425,21 +439,7 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/tags/Cryptography/</loc>
-    <lastmod>2023-11-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://albert-notes.github.io/tags/MyFirstCTF/</loc>
-    <lastmod>2023-11-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/tags/Reverse-Engineering/</loc>
     <lastmod>2023-11-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -453,6 +453,13 @@
   </url>
   
 
+  
+  <url>
+    <loc>http://albert-notes.github.io/categories/Biology/</loc>
+    <lastmod>2023-11-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>http://albert-notes.github.io/categories/Computer-Science/</loc>
@@ -469,7 +476,7 @@
   </url>
   
   <url>
-    <loc>http://albert-notes.github.io/categories/Biology/</loc>
+    <loc>http://albert-notes.github.io/categories/CTF/</loc>
     <lastmod>2023-11-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -477,13 +484,6 @@
   
   <url>
     <loc>http://albert-notes.github.io/categories/YMMC/</loc>
-    <lastmod>2023-11-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://albert-notes.github.io/categories/CTF/</loc>
     <lastmod>2023-11-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
